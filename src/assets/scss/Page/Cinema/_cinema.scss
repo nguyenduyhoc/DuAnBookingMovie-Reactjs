@@ -1,0 +1,242 @@
+// List Cinemas
+#homeCinemaHeadBackground img {
+    width: 100%;
+    height: 100px;
+}
+
+#homeCinemaComplex {
+    .listPCinemas {
+        display: block;
+        min-height: 705px;
+        border: 1px solid #ebebec;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        li {
+            width: 100%;
+            height: 90px;
+            opacity: 0.5;
+            a {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                img {
+                    justify-items: center;
+                    text-align: center;
+                    display: inline-block;
+                    width: 50px;
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: calc(100% - 40px);
+                    transform: translateX(-50%);
+                    border-bottom: 1px solid #fff;
+                    border-color: rgba(238, 238, 238, 0.88);
+                }
+            }
+            &:hover {
+                opacity: 1;
+            }       
+        }
+       
+    }
+    #listCinemas {
+        min-height: 705px;
+        border-top: 1px solid #ebebec;
+        border-bottom: 1px solid #ebebec;
+        height: 705px;
+        overflow: hidden;
+        .cinemas {
+            padding: 15px;
+            padding-left: 20px;
+            display: flex;
+            clear: both;
+            width: 100%;
+            position: relative;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: all 0.2s;
+            span {
+                display: block;
+                line-height: 1.4;
+            }
+            .nameCinema {
+                font-size: 14px;
+                color: #000;
+            }
+            .colorCinema {
+                display: inline-block !important;
+            }
+            .colorCinema.BHD {
+                color: #8bc541;
+            }
+            .infoMovieCinema {
+                font-size: 12px;
+                color: #949494;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .detailMovieCinema a {
+                color: red;
+                font-size: 12px;
+            }
+            .cinemasImage {
+                width: 50px;
+                height: 50px;
+                margin-right: 20px;
+            }
+        }
+        .cinemas:hover {
+            opacity: 1;
+        }
+        .cinemas::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: calc(100% - 40px);
+            transform: translateX(-50%);
+            border-bottom: 1px solid #fff;
+            border-color: rgba(238, 238, 238, 0.88);
+        }
+    }
+    .active {
+        opacity: 1 !important;
+    }
+    #listMovie {
+        display: flexbox;
+        height: 705px;   
+        border: 1px solid #ebebec;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .movieInfo {
+            display: flex;
+            cursor: pointer;
+            width: 100%;
+        }
+        .wrapMovie {
+            display: flexbox;
+            padding-bottom: 17px;
+            padding-top: 20px;
+            padding-right: 15px;
+            padding-left: 20px;
+            width: 100%;
+            position: relative;
+            margin-bottom: 0;
+            border: none;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+        .wrapMovie::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: calc(100% - 40px);
+            transform: translateX(-50%);
+            border-bottom: 1px solid #ccc;
+            border-color: rgba(238, 238, 238, 0.88);
+        }
+        .movieImage {
+            width: 50px;
+            display: flex;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .wrapInfo {
+            p {
+                margin: 0;
+                line-height: 1.7;
+                font-size: 12px;
+                color: #9b9b9b;
+            }
+            .ageTag {
+                background-color: #fb4226;
+                color: #fff;
+                border-radius: 4px;
+                padding: 0 5px;
+                float: left;
+                margin-right: 5px;
+                font-size: 12px;
+                min-width: 33px;
+                text-align: center;
+            }
+            .ageTag-general {
+                background-color: #00ac4d;
+            }
+            .movieTitle {
+                font-size: 14px;
+                display: block;
+                font-family: "SF Medium";
+                line-height: 22px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: #000;
+            }
+        }
+        .movieSession {
+            display: flex;
+            width: 100%;
+            transition: height 0.3s ease-in-out;
+        }
+        .listTagTime {
+            display: block;
+            width: 100%;
+            padding-top: 15px;
+        }
+        .movieVersion {
+            display: flex;
+            width: 100%;
+            font-family: "SF Medium";
+            font-size: 16px;
+            color: #000;
+            margin-bottom: 5px;
+        }
+        .movieTimeSession {
+            width: calc(25% - 10px);
+            font-family: "SF Medium";
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0px 10px 10px 0px;
+            padding: 5px 10px;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+            background-color: rgba(246, 246, 246, 0.5);
+            border-radius: 7px;
+            color: #9b9b9b;
+            border: 1px solid #e4e4e4;
+            .movie-start-time {
+                font-size: 18px;
+                font-weight: 500;
+                color: #108f3e;
+            }
+        }
+    }
+}
+
+// responsive
+#cinema{
+    @include Responsive(xl){
+      display: block;
+    }
+    @include Responsive(md){
+        display: none;
+        
+    }
+    @include Responsive(sm){
+        display: none;
+      
+    }
+    @include Responsive(xs){
+        display: none;
+       
+    }
+}

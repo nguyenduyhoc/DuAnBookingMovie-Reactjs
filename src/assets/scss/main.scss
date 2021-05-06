@@ -1,0 +1,27 @@
+@import './Base/reset';
+// Helper
+@import './Helper/variable';
+@import './Helper/mixin';
+@import './Helper/extend';
+@import './Helper/function';
+//Component
+@import './Component/navigations';
+@import './Component/tabPanel';
+@import './Component/playVideoCarousel';
+@import './Component/findBoxMovie';
+@import './Component/playVideoShowingMovieTime';
+@import './Component/news';
+@import './Component/responsiveVideo';
+//Layout
+@import './Layout/body';
+@import './Layout/header';
+@import './Layout/footer';
+//Pages
+@import './Page/Cinema/cinema';
+@import './Page/Application/application';
+@import './Page/Carousel/carousel';
+@import './Page/Login/login';
+@import './Page/Detail/detail';
+//Vendor
+@import './Vendor/SlickCarouselFixed/slickCarousel';
+@import 'node_modules/react-modal-video/scss/modal-video.scss';

@@ -1,0 +1,63 @@
+@import '../Helper/variable';
+@import '../Helper/mixin';
+.imgNews {
+    img {
+        border-radius: 5px;
+    }
+    button{
+        background-color:  $color-none;
+    }
+    
+}
+
+.imgNews{
+    .row {
+    @include Responsive(xl){
+     img{
+        width: 100%;
+     }
+       
+    }
+    @include Responsive(md){
+    img{
+         width: 100%;
+     }
+        
+    }
+    @include Responsive(sm){
+        display: inline-block;
+        img{
+            width: 350px !important  ;
+        }
+        .stepImg {
+            img{ 
+                width: 100px !important
+            }
+            .stepContent{
+                display: flex;
+            } 
+            
+        }
+        
+      
+    }
+    @include Responsive(xs){
+        
+        display: inline-block;
+        img{
+            width: 350px !important  ;
+        }
+        .stepImg {
+            img{
+                
+                width: 100px !important
+            }
+            .stepContent{
+                display: flex;
+            } 
+        }
+
+        
+    }
+}
+}

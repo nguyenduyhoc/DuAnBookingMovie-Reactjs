@@ -1,0 +1,24 @@
+@import '../Helper/mixin';
+@import '../Helper/variable';
+
+#responsiveVideo{
+    @include Responsive(xl){
+        width: 1000px;
+        height: 700px;
+    }
+    @include Responsive(md){
+        width: 1000px;
+        height: 700px;
+        
+    }
+    @include Responsive(sm){
+        width: 500px;
+        height: 350px;
+      
+    }
+    @include Responsive(xs){
+        width: 100%;
+        height: 100%;
+       
+    }
+}

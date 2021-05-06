@@ -1,0 +1,85 @@
+import React from 'react'
+import Slider from "react-slick";
+
+export default function Application() {
+    const settings = {
+        className: 'section-outstanding__slider',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        infinite: false,
+        row: 1,
+    };
+    return (
+        <div id="application" className="mt-5">
+            <section id="appBlock" className="container-fluid">
+                    <div className="row" id="wrapHomeApp">
+                        <div className="col-xs-12 col-md-12" id="homeApp">
+                            <div className="MaxWidth940">
+                                <div className="row">
+                                    <div className="col-md-6 app_content_left">
+                                        <p className="app_textLeft">Ứng dụng tiện lợi dành cho</p>
+                                        <p className="app_textLeft">người yêu điện ảnh</p>
+                                        <br />
+                                        <p className="app_textSmallLeft">
+                                            Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp và đổi quà hấp dẫn.
+              </p>
+                                        <br />
+                                        <button id="app_buttonLeft">App miễn phí - Tải về ngay</button>
+                                        <p className="app_textUnder">
+                                            TIX có 2 phiên bản <a href="#">IOS</a>
+                                            <a className="ml-2" href="#">Android</a>
+                                        </p>
+                                    </div>
+                                    <div className="col-md-6 app_content_right">
+                                        <img className="phone_img" src="./img/Footer/mobile.png" alt />
+                                        <div className="app_phoneSlider slick">
+                                            <Slider {...settings}>
+
+                                                <div>
+                                                    <img src="./img/Footer/slide2.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide4.jpg" alt />
+                                                </div>
+
+                                                <div>
+                                                    <img src="./img/Footer/slide3.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide5.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide6.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide7.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide8.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide11.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide12.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide13.jpg" alt />
+                                                </div>
+                                                <div>
+                                                    <img src="./img/Footer/slide9.jpg" alt />
+                                                </div>
+
+
+                                            </Slider>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+    )
+}

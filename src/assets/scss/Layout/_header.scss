@@ -1,0 +1,26 @@
+@import '../Helper/variable';
+.logoWeb {
+    width : 70px;
+  }
+ // // NavBar
+  .nav-link {
+    justify-content:space-between;
+    font-size: 20px;
+    color: $color-black-0;
+    transition: all 0.3s;
+    &:hover {
+        color: $color-red-0;
+    }
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  color:$color-red-0;
+}
+  
+  #navBarHeader{
+    top: 0;
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(255,255,255,.95);
+    box-shadow: 0 0 15px rgb(0 0 0 / 30%);
+    width: 100%;
+}

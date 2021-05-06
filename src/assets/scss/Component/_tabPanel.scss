@@ -1,0 +1,18 @@
+@import '../Helper/variable';
+@import '../Helper/mixin';
+
+.tabPanel{
+    &:hover{
+        color: $color-black-0;
+        font-size: 25px;
+    }
+
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    padding: 5px;
+    font-size:30px;
+    @include tabPanel;
+    
+}
+   
+

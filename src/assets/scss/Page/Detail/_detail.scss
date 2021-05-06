@@ -1,0 +1,24 @@
+@import '../../Helper/variable';
+@import '../../Helper/mixin';
+
+.detail{
+    background-image: url('../../../img/backapp.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 2000px;
+}
+
+.contentDetail{
+    margin-top: 15%;
+    p,h2{
+        color: $color-white-0 ;
+    }
+}
+.textInformation{
+    p,h5{
+        color: $color-white-0;
+        font-weight: bold;
+    }
+
+}
