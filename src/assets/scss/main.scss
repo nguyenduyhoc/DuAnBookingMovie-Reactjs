@@ -12,6 +12,7 @@
 @import './Component/playVideoShowingMovieTime';
 @import './Component/news';
 @import './Component/responsiveVideo';
+@import './Component/moolight';
 //Layout
 @import './Layout/body';
 @import './Layout/header';
@@ -22,6 +23,10 @@
 @import './Page/Carousel/carousel';
 @import './Page/Login/login';
 @import './Page/Detail/detail';
+@import './Page/Register/register';
+@import './Page/Ticket/ticket';
+@import './Page/Admin/navbarAdmin';
+@import './Page/UserInformation/userInformation';
 //Vendor
 @import './Vendor/SlickCarouselFixed/slickCarousel';
 @import 'node_modules/react-modal-video/scss/modal-video.scss';

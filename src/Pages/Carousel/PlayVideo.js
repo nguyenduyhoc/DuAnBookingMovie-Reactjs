@@ -5,6 +5,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
 
+
+
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -50,7 +53,7 @@ Fade.propTypes = {
   onExited: PropTypes.func,
 };
 
-export default function PlayVideo() {
+export default function PlayVideo(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -61,7 +64,6 @@ export default function PlayVideo() {
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <div>
       <button className="btn iconPlayVideoCarousel" type="button" onClick={handleOpen}>
@@ -81,10 +83,10 @@ export default function PlayVideo() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-          <iframe id="responsiveVideo" src="https://www.youtube.com/embed/gqcpChNYH10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="responsiveVideo" style={{width:800,height:500}} src={props.movie?.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </Fade>
       </Modal>
-    </div>
+    </div> 
   );
 }

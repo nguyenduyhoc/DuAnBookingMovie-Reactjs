@@ -1,8 +1,10 @@
-import React from 'react'
+import React from "react";
+import Slider from "react-slick";
 import FindMovieBox from './FindMovieBox.js'
 import PlayVideoCarousel from './PlayVideoCarousel.js'
 
 export default function Carousel() {
+
     return (
         <div>
             <div id="demo" className="carousel slide " data-ride="carousel">
@@ -22,8 +24,10 @@ export default function Carousel() {
                     <span className="carousel-control-next-icon" />
                 </a>
             </div>
+
             <FindMovieBox />
         </div>
+
 
     )
 }

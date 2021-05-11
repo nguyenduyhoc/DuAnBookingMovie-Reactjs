@@ -2,6 +2,7 @@
 @import '../../Helper/variable';
 
 .carousel{
+    margin-top: 8px;
     @include Responsive(xl){
         display: flex;
         .iconPlayVideoCarousel{

@@ -1,21 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDetailMovieAction } from '../../redux/Action/MovieAction'
 import PlayVideo from '../Carousel/PlayVideo'
 
 
-export default function Detail() {
+export default function Detail(props) {
+    // console.log(props)
+    const { detailMovie } = useSelector(state => state.MovieReducer)
+    const dispatch = useDispatch()
+    const id = props.match.params.id
+    useEffect(() => {
+        dispatch(getDetailMovieAction(id))
+    }, [])
     return (
         <div className="detail ">
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-4 container-fluid mt-5 ">
 
-                        <img style={{ marginTop: '20px', width: '80%' }} src="./img/poster/lua-deu-gap-lua-dao-the-con-heartist-c16-16082739589858_215x318.png" alt="hinhAnh" />
-                        <PlayVideo />
+                        <img style={{ marginTop: '20px', width: '80%' }} src={detailMovie.hinhAnh} alt="hinhAnh" />
                     </div>
                     <div className="col-4 contentDetail">
-                        <h2>30.04.2021</h2>
-                        <h2>Trạng Tí Phiêu Lưu Ký</h2>
-                        <p>100 phút - 0 IMDb - 2D/Digital</p>
+                        <h2>{detailMovie.ngayKhoiChieu}</h2>
+                        <h2>{detailMovie.tenPhim}</h2>
                         <button className="btn btn-danger">Buy Ticket</button>
                     </div>
                     <div className="col-4">
@@ -311,31 +318,22 @@ export default function Detail() {
                             <div className="row textInformation">
                                 <div className="col-3">
                                     <h5>Ngày công chiếu</h5>
-                                    <h5>Đạo diễn</h5>
-                                    <h5>Diễn viên</h5>
-                                    <h5>Thể Loại</h5>
-                                    <h5>Định dạng</h5>
-                                    <h5>Quốc Gia SX</h5>
+                                    <h5>Đánh giá</h5>
                                 </div>
                                 <div className="col-3">
-                                    <p>30.04.2021</p>
-                                    <p>Phan Gia Nhật Linh</p>
-                                    <p>Phan Gia Nhật Linh</p>
-                                    <p>hài hước</p>
-                                    <p>2D/Digital</p>
-                                    <p>Việt Nam</p>
-
+                                    <p>{detailMovie.ngayKhoiChieu}</p>
+                                   <p>{detailMovie.danhGia}</p>
                                 </div>
                                 <div className="col-6" >
                                     <h5>Nội dung</h5>
-                                    <p>Trạng Tí chuyển thể từ truyện tranh nổi tiếng Thần đồng đất Việt, xoay quanh Tí - cậu bé thông minh, láu lỉnh. Cùng các bạn Sửu, Dần, Mẹo, cậu nhiều lần giúp triều đình thoát khỏi các tình huống nguy hiểm, chống lại ngoại bang</p>
+                                    <p>{detailMovie.moTa}</p>
 
                                 </div>
 
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            
+
                         </div>
                     </div>
                 </div>

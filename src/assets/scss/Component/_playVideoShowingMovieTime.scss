@@ -2,6 +2,7 @@
 @import '../Helper/mixin';
 
 #movieShowingTime{
+
     width: 100%;
     height: 100%;
     margin-bottom: 5px;
@@ -90,13 +91,22 @@
                 
             }
             @include Responsive(md){
+                width: 250;
+                height: 200;
                
                 
             }
             @include Responsive(sm){
-               
+                margin: 5px;
+                padding: 10px;
+                width: 150;
+                height: 200;
             }
             @include Responsive(xs){
+                margin: 5px;
+                padding: 10px;
+                width: 150;
+                height: 200;
               
             }
         }

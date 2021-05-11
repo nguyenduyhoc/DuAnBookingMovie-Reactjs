@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -50,7 +51,7 @@ Fade.propTypes = {
     onExited: PropTypes.func,
 };
 
-export default function PlayVideoMovieShowTime() {
+export default function PlayVideoMovieShowTime(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -63,21 +64,20 @@ export default function PlayVideoMovieShowTime() {
     };
 
     return (
-        <div id="movieShowingTime">
-            <div className="overlay">
-                <a href="#" > <img src="./img/poster/lua-deu-gap-lua-dao-the-con-heartist-c16-16082739589858_215x318.png" alt="Los Angeles" /></a>
+        <div style={{height:480 , width:300}} id="movieShowingTime">
+            <div  className="overlay">
+                <NavLink to={`/detail/${props.movie?.maPhim}`} > <img  src={props.movie?.hinhAnh} alt="Los Angeles" /></NavLink>
                 <button className="btn buttonPlayVideo" type="button" onClick={handleOpen}>
                     <i class="far fa-play-circle"></i>
                 </button>
                 <div className="titleMovie">
                     <div className="movieDetail">
-                        <h4>Tiêu đề Phim</h4>
-                        <h5>Detail :</h5>
+                        <h4>{props.movie?.tenPhim}</h4>
+                        <p>Đánh giá: {props.movie?.danhGia}</p>
                     </div>
                     <button className="btn btn-danger btnBuyTicket">Buy Ticket</button>
                 </div>
             </div>
-
 
 
             <Modal
@@ -94,7 +94,7 @@ export default function PlayVideoMovieShowTime() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <iframe id="responsiveVideo" src="https://www.youtube.com/embed/gqcpChNYH10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe id="responsiveVideo" src={props.movie?.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </Fade>
             </Modal>

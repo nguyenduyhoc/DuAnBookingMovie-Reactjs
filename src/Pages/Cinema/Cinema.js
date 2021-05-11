@@ -1,8 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCinemaAction } from '../../redux/Action/CinemaAction';
+
 
 export default function Cinema() {
+    const { allCinema } = useSelector(state => state.CinemaReducer);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCinemaAction())
+    }, [])
+
+    const renderLogoCinema = () => {
+        return allCinema.map((cinema, index) => {
+            return <li className="nav-item active" key={index}>
+                <a href="#" className="nav-link">
+                    <img src={cinema.logo} alt />
+                </a>
+            </li>
+        })
+    }
+
+
     return (
         <div id="cinema">
             <section className="container">
@@ -11,36 +32,7 @@ export default function Cinema() {
                 </div>
                 <div id="homeCinemaComplex" className="row session-main">
                     <ul className="col-md-1 nav nav-tabs listPCinemas">
-                        <li className="nav-item active">
-                            <a href="#" className="nav-link">
-                                <img src="./img/logo/logo1.png" alt />
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="" className="nav-link">
-                                <img src="./img/logo/logo2.png" alt />
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link">
-                                <img src="./img/logo/logo3.png" alt />
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link">
-                                <img src="./img/logo/logo4.jpg" alt />
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link">
-                                <img src="./img/logo/logo5.png" alt />
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link">
-                                <img src="./img/logo/galaxy-cinema-logo.png" alt />
-                            </a>
-                        </li>
+                        {renderLogoCinema()}
                     </ul>
                     <div id="listCinemas" className="col-md-4 bg-white">
                         <div className="cinemas active">

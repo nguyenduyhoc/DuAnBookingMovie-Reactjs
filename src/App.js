@@ -16,11 +16,16 @@ import Detail from "./Pages/Detail/Detail";
 import Footer from "./Components/Footer/Footer";
 import Admin from "./Pages/Admin/Admin";
 import SellTicket from "./Pages/SellTicket/SellTicket";
+import Register from "./Pages/Register/Register";
+import UsersManagement from "./Pages/Admin/UsersManagement";
+import MovieManagement from "./Pages/Admin/MovieManagement";
+import CalendarMovieManagement from "./Pages/Admin/CalendarMovieManagement";
+import UserInformation from "./Pages/Register/UserInformation";
 export const history = createBrowserHistory();
 
 
 
-
+ 
 function App(props) {
   return (
     <Router history={history}>
@@ -28,13 +33,18 @@ function App(props) {
       <Switch>
         <Route exact path="/home"component={Home} />
         <Route exact path="/login"  component={Login} />
-        <Route exact path="/detail" component={Detail}  />
+        <Route exact path="/register"  component={Register} />
+        <Route exact path="/UserInformation"  component={UserInformation} />
+        <Route exact path="/detail/:id" component={Detail}  />
         <Route exact path="/admin"  component={Admin} />
+        <Route exact path="/admin/UsersManagement"  component={UsersManagement} />
+        <Route exact path="/admin/MovieManagement"  component={MovieManagement} />
+        <Route exact path="/admin/CalendarMovieManagement"  component={CalendarMovieManagement} />
         <Route exact path="/sellticket"  component={SellTicket} />
         <Route exact  path="/"  component={Home} />
         <Route path="*" component={Home} />
       </Switch>
-      <Footer />
+      
     </Router>
   );
 }

@@ -1,39 +1,54 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import Slider from "react-slick";
 import PlayVideoMovieShowTime from './PlayVideoMovieShowingTime';
+import { useSelector, useDispatch } from 'react-redux'
 
 
 
 export default function MovieShowtime(props) {
-    const ref = useRef({});
-
+    const { allMovie } = useSelector(state => state.MovieReducer)
+    // console.log(allMovie)
     const settings = {
-        className: 'section-outstanding__slider',
-        slidesToShow: 4,
-        slidesToScroll: 2,
-        arrows: true,
-        infinite: false,
-        row: 4,
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3,
+        speed: 500,
+        rows: 1,
+        slidesPerRow: 2,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    row: 2,
+                    slidesToShow: 1.5,
+                    slidesPerRow: 2,
+                    row: 1,
                 }
             },
             {
                 breakpoint: 719,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 1.5,
+                    slidesPerRow: 1,
                     row: 1,
 
                 }
             }
         ]
     };
+
+
+    const renderPlayVideoMovieShowTime = () => {
+        return allMovie.map((movie, index) => {
+
+            return <div className="d-block"  key={index}>
+                <PlayVideoMovieShowTime movie={movie} />
+            </div>
+
+        })
+    }
+
 
     return (
         <div id="movieSchedule" className="container">
@@ -49,119 +64,22 @@ export default function MovieShowtime(props) {
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="showing" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div className="container movieSlider">
-                        <Slider ref={ref} {...settings}>
-                            <div>
-                                <div >
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
+                        <Slider {...settings}>
+                            {renderPlayVideoMovieShowTime()}
                         </Slider>
 
                     </div>
                 </div>
                 <div class="tab-pane fade" id="soon" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div className="container movieSlider" >
-                        <Slider ref={ref} {...settings}>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-                            <div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-                                <div>
-                                    <PlayVideoMovieShowTime />
-                                </div>
-
-                            </div>
-
+                        <Slider {...settings}>
+                            {renderPlayVideoMovieShowTime()}
                         </Slider>
 
                     </div>
                 </div>
 
             </div>
-
 
         </div>
     )

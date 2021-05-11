@@ -14,7 +14,8 @@ export default function Home(props) {
           <MovieShowtime />
           <Cinema />
           <News />
-          <Application />          
+          <Application />
+          <Footer />          
         </div>
     )
 }
