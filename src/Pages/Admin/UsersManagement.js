@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { getAllUser, getAllUserPage } from '../../redux/Action/AdminAction';
+import { deletedUser, getAllUser, getAllUserPage } from '../../redux/Action/AdminAction';
 import Pagination from "react-js-pagination";
 import AddUser from './AddUser';
+import { a } from '@react-spring/web';
 
 export default function UsersManagement() {
 
 
 
     // Search User
-    const { allUser } = useSelector(state => state.AdminReducer)
+    const { allUser, allUserPage } = useSelector(state => state.AdminReducer)
     // console.log(countAllUser)
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getAllUser())
+        dispatch(getAllUserPage(1))
     }, [])
 
     const [searchValue, setSearchValue] = useState('')
+    const [pageNumber, setPageNumber] = useState(1);
     const handleValue = (e) => {
         setSearchValue(e.target.value)
     }
+
+
 
     // console.log(arrUser)
     const renderSearch = () => {
@@ -28,7 +34,7 @@ export default function UsersManagement() {
         console.log(arrItem)
         return arrItem.map((item, index) => {
             return <tr key={index}>
-                <td>{index+= 1}</td>
+                <td>{index += 1}</td>
                 <td>{item?.taiKhoan}</td>
                 <td>{item?.matKhau}</td>
                 <td>{item?.hoTen}</td>
@@ -37,7 +43,8 @@ export default function UsersManagement() {
                 <td>{item?.maNhom}</td>
                 <td>{item?.email}</td>
                 <td><button className="btn btn-primary">Cập nhật</button></td>
-                <td><button className="btn btn-danger">Xóa</button></td>
+                <td><button className="btn btn-danger" onClick={()=>{
+                    dispatch(deletedUser(item.taiKhoan)) }} >Xóa</button></td>
             </tr>
         })
 
@@ -57,23 +64,25 @@ export default function UsersManagement() {
         // console.log(`active page is ${pageNumber}`);
         const newState = { activePage: pageNumber }
         setState(newState);
+        setPageNumber(pageNumber)
         dispatch(getAllUserPage(pageNumber))
+        console.log(pageNumber)
     }
 
+
     // All user
-    const { allUserPage } = useSelector(state => state.AdminReducer);
+    
     // console.log(allUserPage)
 
-    useEffect(() => {
-        dispatch(getAllUserPage(1))
-    }, [])
+
+
 
 
 
     const renderAllUserPage = () => {
         return allUserPage.items?.map((user, index) => {
             return <tr key={index}>
-                <td>{index += 1}</td>
+                <td>{(pageNumber - 1) * 10 + index + 1}</td>
                 <td>{user?.taiKhoan}</td>
                 <td>{user?.matKhau}</td>
                 <td>{user?.hoTen}</td>
@@ -82,7 +91,9 @@ export default function UsersManagement() {
                 <td>{user?.maNhom}</td>
                 <td>{user?.email}</td>
                 <td><button className="btn btn-primary">Cập nhật</button></td>
-                <td><button className="btn btn-danger">Xóa</button></td>
+                <td><button className="btn btn-danger" onClick={()=>{
+                    dispatch(deletedUser(user.taiKhoan))
+                }}>Xóa</button></td>
             </tr>
         })
     }

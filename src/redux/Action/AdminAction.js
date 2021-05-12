@@ -48,16 +48,53 @@ export const addUser = (addUser) => {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
 
             })
-           
+
             // console.log('result', result.data);
-            dispatch({
-                type: "ADD-USER",
-                userAdded: result.data
+            // dispatch({
+            //     type: "ADD-USER",
+            //     userAdded: result.data
+            // })
+            alert("Thêm người dùng thành công !!")
+
+        } catch (errors) {
+            alert("Thêm người dùng không thành công")
+            console.log('errors', errors)
+        }
+    }
+}
+
+export const deletedUser = (taiKhoan) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`,
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
+
             })
-            alert('Thêm người dùng thành công!')
-            
+            // getAllUser()
+            // getAllUserPage()
+            alert("Xóa người dùng thành công !!")
+
+        } catch (errors) {
+            alert("Xóa người dùng không thành công")
+            console.log('errors', errors)
+        }
+    }
+}
+
+export const updateUser = () => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+                method: 'PUT',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
+            })
+
         } catch (errors) {
             console.log('errors', errors.response.data)
         }
     }
 }
+

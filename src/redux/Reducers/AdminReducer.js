@@ -1,7 +1,7 @@
 const initialState = {
     allUserPage: [],
     allUser: [],
-    userAdded: {}
+    // userAdded: {}
 }
 
 export const AdminReducer = (state = initialState, action) => {
@@ -13,11 +13,11 @@ export const AdminReducer = (state = initialState, action) => {
         case "GET-ALL-USER": {
             return { ...state, allUser: action.allUser }
         }
-        case "ADD-USER": {
-            state.userAdded= [...state.userAdded, action.userAdded]
+        // case "ADD-USER": {
+        //     state.userAdded= [...state.userAdded, action.userAdded]
             
-            return { ...state}
-        }
+        //     return { ...state}
+        // }
         default:
             return { ...state }
     }

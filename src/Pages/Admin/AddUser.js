@@ -11,25 +11,27 @@ export default function AddUser() {
             taiKhoan: '',
             matKhau: '',
             hoTen: '',
-            sdt: 0,
+            soDt: '',
             maLoaiNguoiDung: '',
-            maNhom: '',
+            maNhom: 'GP02',
             email: ''
         },
         validationSchema: Yup.object().shape({
             taiKhoan: Yup.string().required('Tài khoản không được bỏ trống'),
             matKhau: Yup.string().required('Mật khẩu không được bỏ trống').min(2, "Mật khẩu tối thiểu 2 ký tự").max(32, "Mật khẩu tối đa 32 ký tự"),
             hoTen: Yup.string().required('Họ tên không được bỏ trống'),
-            sdt: Yup.string().required('Số điện thoại không được bỏ trống'),
+            soDt: Yup.string().required('Số điện thoại không được bỏ trống'),
             maLoaiNguoiDung: Yup.string().required('Mã loại người dùng không được bỏ trống'),
             email: Yup.string().required('Email không được bỏ trống'),
         }),
-        onSubmit: values => {
-            const action = addUser(values)
-            dispatch(action)
-        }
     })
-    console.log(formik.values)
+
+    const handleSubmit = () => {
+        if (formik.isValid) {
+            console.log(formik.values)
+            dispatch(addUser(formik.values))
+        }
+    }
 
     return (
         <div className="modal-content">
@@ -57,7 +59,7 @@ export default function AddUser() {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="sdt">Số điện thoại</label>
-                            <input type="number" className="form-control" id="sdt" placeholder="Nhập số điện thoại" onChange={formik.handleChange} />
+                            <input type="number" className="form-control" id="soDt" placeholder="Nhập số điện thoại" onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.sdt}</p>
 
                         </div>
@@ -69,15 +71,15 @@ export default function AddUser() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}>
                                 <option value="" hidden>Chọn mã</option>
-                                <option value="khachHang">KhangHang</option>
-                                <option value="quanTri">QuanTri</option>
+                                <option value="KhachHang">KhachHang</option>
+                                <option value="QuanTri">QuanTri</option>
                             </select>
                             {/* <input type="text" className="form-control" id="maLoaiNguoiDung" placeholder="Nhập mã" onChange={formik.handleChange} /> */}
                             <p className="text-danger">{formik.errors.maLoaiNguoiDung}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="maNhom">Mã nhóm</label>
-                            <input type="text" className="form-control" id="maNhom" placeholder="Nhập mã" onChange={formik.handleChange} />
+                            <input type="text" className="form-control" id="maNhom" placeholder="GP02" disabled />
                             <p className="text-danger">{formik.errors.maNhom}</p>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -89,7 +91,7 @@ export default function AddUser() {
                 </form>
             </div>
             <div className="modal-footer">
-                <button type="button" id="btnThemThanhVien" className="btn btn-warning" onClick={formik.handleSubmit}>Thêm thành viên</button>
+                <button type="button" id="btnThemThanhVien" className="btn btn-warning" onClick={handleSubmit}>Thêm thành viên</button>
             </div>
         </div>
     )
