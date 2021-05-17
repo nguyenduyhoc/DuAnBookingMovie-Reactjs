@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteMovieAction, getAllMovieAction, getAllMoviePage } from '../../../redux/Action/MovieAction'
 import Pagination from "react-js-pagination";
 import AddMovie from './AddMovie';
+import UpdateMovie from './UpdateMovie';
 
 export default function MovieManagement() {
     // searchMovie:
@@ -16,6 +17,10 @@ export default function MovieManagement() {
     const [state, setState] = useState({
         activePage: 1
     })
+    // Update Movie
+    const [updateMovie, setUpdateMovie] = useState(true)
+    // Choose IDs for update
+    const [movieID, setMovieID] = useState("");
 
     // searchValue
     const handleValue = (e) => {
@@ -47,7 +52,13 @@ export default function MovieManagement() {
                 <td>{movie?.maNhom}</td>
                 <img style={{ width: 100 }} src={movie?.hinhAnh} alt={movie?.tenPhim}></img>
                 <td>{movie?.moTa}</td>
-                <td><button className="btn btn-primary">Cập nhật</button></td>
+                <td><button className="btn btn-primary"
+                    data-toggle="modal" data-target="#exampleModal"
+                    onClick={() => {
+                        setMovieID(movie)
+                        setUpdateMovie(false)
+                    }}
+                >Cập nhật</button></td>
                 <td><button className="btn btn-danger" onClick={() => {
                     dispatch(deleteMovieAction(movie?.maPhim))
                 }}>Xóa</button></td>
@@ -67,7 +78,11 @@ export default function MovieManagement() {
                 <td>{movie?.maNhom}</td>
                 <img style={{ width: 100 }} src={movie?.hinhAnh} alt={movie?.tenPhim}></img>
                 <td>{movie?.moTa}</td>
-                <td><button className="btn btn-primary">Cập nhật</button></td>
+                <td><button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                    onClick={() => {
+                        setMovieID(movie)
+                        setUpdateMovie(false)
+                    }}>Cập nhật</button></td>
                 <td><button className="btn btn-danger" onClick={() => {
                     dispatch(deleteMovieAction(movie?.maPhim))
                 }}>Xóa</button></td>
@@ -123,23 +138,13 @@ export default function MovieManagement() {
                             <div className="row">
                                 <div className="m-3">
                                     {/* Button trigger modal */}
-                                    <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                    <button className="btn btn-warning" data-toggle="modal" data-target="#exampleModal"
+                                        onClick={() => {
+                                            setUpdateMovie(true)
+                                        }} >
                                         Thêm phim
   </button>
-                                    {/* Modal */}
-                                    <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog" role="document">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h5 className="modal-title" id="exampleModalLabel">Thêm thành viên</h5>
-                                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                < AddMovie />
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div className="col-md-12">
                                     <div className="col-4">
@@ -184,7 +189,11 @@ export default function MovieManagement() {
                         </main>
                     </div>
                 </div>
-
+                <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        {updateMovie ? <AddMovie /> : <UpdateMovie movie={movieID} />}
+                    </div>
+                </div>
             </div>
         </div>
     )

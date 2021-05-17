@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { method } from 'lodash'
 import { GET_ALL_MOVIE,  ACCESS_TOKEN } from '../../util/Setting'
 
 
@@ -85,6 +84,25 @@ export const deleteMovieAction = (maPhim) => { // Tai khoan va mat khau
             alert('Xóa phim thành công !!')
         } catch (errors) {
             alert('Xóa phim không thành công !!')
+            console.log('errors', errors.response?.data)
+        }
+    }
+}
+
+export const updateMovieAction = (updateMovie) => { // Tai khoan va mat khau
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhim`,
+                method: 'POST',
+                data: updateMovie,
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
+            })
+            getAllMoviePage()
+            getAllMovieAction()
+            alert('Cập nhật phim thành công !!')
+        } catch (errors) {
+            alert('Cập nhật phim không thành công !!')
             console.log('errors', errors.response?.data)
         }
     }

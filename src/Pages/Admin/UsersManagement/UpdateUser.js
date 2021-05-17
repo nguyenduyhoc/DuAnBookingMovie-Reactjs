@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
@@ -6,7 +6,7 @@ import { updateInformationUser } from '../../../redux/Action/AdminAction'
 
 
 export default function UpdateUser(props) {
-  
+
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -34,8 +34,6 @@ export default function UpdateUser(props) {
             dispatch(updateInformationUser(formik.values))
         }
     }
-
-
     return (
         <div className="modal-content">
             <div className="modal-header">
