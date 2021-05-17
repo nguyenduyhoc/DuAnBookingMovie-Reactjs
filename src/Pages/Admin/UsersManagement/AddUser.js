@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
-import { addUser } from '../../redux/Action/AdminAction'
+import { addUser } from '../../../redux/Action/AdminAction'
 
 export default function AddUser() {
     const dispatch = useDispatch()

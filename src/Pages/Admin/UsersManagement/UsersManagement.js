@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { deletedUser, getAllUser, getAllUserPage } from '../../redux/Action/AdminAction';
+import { deletedUser, getAllUser, getAllUserPage } from '../../../redux/Action/AdminAction';
 import Pagination from "react-js-pagination";
-import AddUser from './AddUser';
-import UpdateUser from './UpdateUser';
+import AddUser from '../UsersManagement/AddUser';
+import UpdateUser from '../UsersManagement/UpdateUser';
 
 export default function UsersManagement() {
     const dispatch = useDispatch();
@@ -26,7 +26,6 @@ export default function UsersManagement() {
     const handleValue = (e) => {
         setSearchValue(e.target.value)
     }
-
     // for pagination
     let countAllUser = 0;
     for (let i = 0; i < allUser.length; i++) {
@@ -46,7 +45,7 @@ export default function UsersManagement() {
         console.log(arrItem)
         return arrItem.map((item, index) => {
             return <tr key={index}>
-                <td>{index += 1}</td>
+                <td>{(pageNumber - 1) * 10 + index + 1} </td>
                 <td>{item?.taiKhoan}</td>
                 <td>{item?.matKhau}</td>
                 <td>{item?.hoTen}</td>
@@ -54,9 +53,10 @@ export default function UsersManagement() {
                 <td>{item?.maLoaiNguoiDung}</td>
                 <td>{item?.maNhom}</td>
                 <td>{item?.email}</td>
-                <td><button className="btn btn-primary" onClick={() => {
+                <td><button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" onClick={() => {
                     setUserID(item)
                     setAddUpdateUser(false)
+                    // console.log(item)
                 }}>Cập nhật</button></td>
                 <td><button className="btn btn-danger" onClick={() => {
                     dispatch(deletedUser(item.taiKhoan))
@@ -79,6 +79,7 @@ export default function UsersManagement() {
                 <td><button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" onClick={() => {
                     setUserID(user)
                     setAddUpdateUser(false)
+                    // console.log(user)
                 }} >Cập nhật</button></td>
                 <td><button className="btn btn-danger" onClick={() => {
                     dispatch(deletedUser(user.taiKhoan))
@@ -180,7 +181,6 @@ export default function UsersManagement() {
                                                 <th></th>
                                                 <th></th>
                                             </tr>
-
                                         </thead>
                                         <tbody>
                                             {searchValue === "" ? renderAllUserPage() : renderSearch()}

@@ -17,14 +17,14 @@ export default function DropDownAdmin(props) {
         history.push('/');
     }
     return (
-        <div className="mr-5">
-            <div className="dropdown">
+        <div style={{marginRight:90}} >
+            <div className="dropdown btn-group">
                 <button className="btn dropdown-toggle" style={{ background: "transparent" }} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {user.taiKhoan}
                 </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {user.maLoaiNguoiDung === "QuanTri" ? <NavLink to="/admin"><button className="dropdown-item">Admin</button></NavLink> : ""}
-                    <NavLink to="/UserInformation"><button className="dropdown-item">Thông tin cá nhân</button></NavLink>
+                <div className="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                    {user.maLoaiNguoiDung === "QuanTri" ? <NavLink to="/admin/UsersManagement"><button className="dropdown-item">Admin</button></NavLink> : ""}
+                    <NavLink to="/UserInformation"><button className="dropdown-item">Thông tin cá nhân </button></NavLink>
                     <button onClick={handleLogOut} className="dropdown-item">Đăng xuất</button>
                 </div>
             </div>
