@@ -20,11 +20,11 @@ export const getAllUserPage = (page) => {
     }
 }
 
-export const getAllUser = () => {
+export const getAllUser = (maNhom = "GP02") => {
     return async (dispatch) => {
         try {
             const result = await axios({
-                url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP02`,
+                url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${maNhom}`,
                 method: 'GET'
             })
             // console.log('result', result.data);
@@ -48,12 +48,6 @@ export const addUser = (addUser) => {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
 
             })
-
-            // console.log('result', result.data);
-            // dispatch({
-            //     type: "ADD-USER",
-            //     userAdded: result.data
-            // })
             alert("Thêm người dùng thành công !!")
 
         } catch (errors) {
@@ -83,17 +77,25 @@ export const deletedUser = (taiKhoan) => {
     }
 }
 
-export const updateUser = () => {
+// <---- Check function -->
+export const updateInformationUser = (updateUser) => {
+    console.log('updateuser', updateUser)
     return async (dispatch) => {
         try {
             const result = await axios({
                 url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
                 method: 'PUT',
+                data: updateUser,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
             })
-
+            // Checked
+            getAllUserPage()
+            getAllUser()
+            alert("Cập nhật thành công")
         } catch (errors) {
-            console.log('errors', errors.response.data)
+            // Checked
+            alert("Cập nhật không thành công")
+            console.log('errors', errors.response?.data)
         }
     }
 }

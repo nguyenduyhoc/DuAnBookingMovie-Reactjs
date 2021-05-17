@@ -2,7 +2,7 @@ import React from "react";
 import {
   Router,
   Route,
-  Switch,
+  Switch
 } from "react-router-dom";
 import Header from "./Components/Header/Header"
 import Home from "./Components/Home";
@@ -17,8 +17,8 @@ import Footer from "./Components/Footer/Footer";
 import Admin from "./Pages/Admin/Admin";
 import SellTicket from "./Pages/SellTicket/SellTicket";
 import Register from "./Pages/Register/Register";
-import UsersManagement from "./Pages/Admin/UsersManagement";
-import MovieManagement from "./Pages/Admin/MovieManagement";
+import UsersManagement from "./Pages/Admin/UsersManagement/UsersManagement";
+import MovieManagement from "./Pages/Admin/MovieManagement/MovieManagement";
 import CalendarMovieManagement from "./Pages/Admin/CalendarMovieManagement";
 import UserInformation from "./Pages/Register/UserInformation";
 export const history = createBrowserHistory();

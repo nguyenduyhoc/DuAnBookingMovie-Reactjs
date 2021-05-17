@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { loginAction } from '../../redux/Action/UsersAction'
 
-export default function Login(props) {
+export default function Login() {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {

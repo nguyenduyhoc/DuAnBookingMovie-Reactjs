@@ -1,6 +1,7 @@
 const initialState = {
     allUserPage: [],
     allUser: [],
+    
     // userAdded: {}
 }
 
@@ -13,6 +14,9 @@ export const AdminReducer = (state = initialState, action) => {
         case "GET-ALL-USER": {
             return { ...state, allUser: action.allUser }
         }
+        // case "UPDATE-USER": {
+        //     return { ...state, updateUser: action.updateUser }
+        // } => Update thành công là được ko cần gửi lên redux
         // case "ADD-USER": {
         //     state.userAdded= [...state.userAdded, action.userAdded]
             

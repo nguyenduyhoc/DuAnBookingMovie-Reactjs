@@ -1,65 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { deletedUser, getAllUser, getAllUserPage } from '../../redux/Action/AdminAction';
+import { deletedUser, getAllUser, getAllUserPage } from '../../../redux/Action/AdminAction';
 import Pagination from "react-js-pagination";
-import AddUser from './AddUser';
-import { a } from '@react-spring/web';
+import AddUser from '../UsersManagement/AddUser';
+import UpdateUser from '../UsersManagement/UpdateUser';
 
 export default function UsersManagement() {
-
-
-
+    const dispatch = useDispatch();
     // Search User
     const { allUser, allUserPage } = useSelector(state => state.AdminReducer)
-    // console.log(countAllUser)
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getAllUser())
-        dispatch(getAllUserPage(1))
-    }, [])
-
+    // Search value input
     const [searchValue, setSearchValue] = useState('')
+    // Set Update User
+    const [addUpdateUser, setAddUpdateUser] = useState(true)
+    // Set pagination
     const [pageNumber, setPageNumber] = useState(1);
-    const handleValue = (e) => {
-        setSearchValue(e.target.value)
-    }
-
-
-
-    // console.log(arrUser)
-    const renderSearch = () => {
-        let arrItem = allUser.filter(id => (id.taiKhoan?.toLowerCase().includes(searchValue.toLowerCase()) || id.hoTen?.toLowerCase().includes(searchValue.toLowerCase())))
-        console.log(arrItem)
-        return arrItem.map((item, index) => {
-            return <tr key={index}>
-                <td>{index += 1}</td>
-                <td>{item?.taiKhoan}</td>
-                <td>{item?.matKhau}</td>
-                <td>{item?.hoTen}</td>
-                <td>{item?.sdt}</td>
-                <td>{item?.maLoaiNguoiDung}</td>
-                <td>{item?.maNhom}</td>
-                <td>{item?.email}</td>
-                <td><button className="btn btn-primary">Cập nhật</button></td>
-                <td><button className="btn btn-danger" onClick={()=>{
-                    dispatch(deletedUser(item.taiKhoan)) }} >Xóa</button></td>
-            </tr>
-        })
-
-    }
-
+    // Choose IDs for update
+    const [userID, setUserID] = useState("");
     //Paginatiopn
     const [state, setState] = useState({
         activePage: 1
     })
+    // Checked handle value
+    const handleValue = (e) => {
+        setSearchValue(e.target.value)
+    }
     // for pagination
     let countAllUser = 0;
     for (let i = 0; i < allUser.length; i++) {
         countAllUser++
     }
-
     const handlePageChange = (pageNumber) => {
         // console.log(`active page is ${pageNumber}`);
         const newState = { activePage: pageNumber }
@@ -68,17 +39,32 @@ export default function UsersManagement() {
         dispatch(getAllUserPage(pageNumber))
         console.log(pageNumber)
     }
+    // console.log(arrUser)
+    const renderSearch = () => {
+        let arrItem = allUser.filter(id => (id.taiKhoan?.toLowerCase().includes(searchValue.toLowerCase()) || id.hoTen?.toLowerCase().includes(searchValue.toLowerCase())))
+        console.log(arrItem)
+        return arrItem.map((item, index) => {
+            return <tr key={index}>
+                <td>{(pageNumber - 1) * 10 + index + 1} </td>
+                <td>{item?.taiKhoan}</td>
+                <td>{item?.matKhau}</td>
+                <td>{item?.hoTen}</td>
+                <td>{item?.sdt}</td>
+                <td>{item?.maLoaiNguoiDung}</td>
+                <td>{item?.maNhom}</td>
+                <td>{item?.email}</td>
+                <td><button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" onClick={() => {
+                    setUserID(item)
+                    setAddUpdateUser(false)
+                    // console.log(item)
+                }}>Cập nhật</button></td>
+                <td><button className="btn btn-danger" onClick={() => {
+                    dispatch(deletedUser(item.taiKhoan))
+                }} >Xóa</button></td>
+            </tr>
+        })
 
-
-    // All user
-    
-    // console.log(allUserPage)
-
-
-
-
-
-
+    }
     const renderAllUserPage = () => {
         return allUserPage.items?.map((user, index) => {
             return <tr key={index}>
@@ -90,13 +76,21 @@ export default function UsersManagement() {
                 <td>{user?.maLoaiNguoiDung}</td>
                 <td>{user?.maNhom}</td>
                 <td>{user?.email}</td>
-                <td><button className="btn btn-primary">Cập nhật</button></td>
-                <td><button className="btn btn-danger" onClick={()=>{
+                <td><button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" onClick={() => {
+                    setUserID(user)
+                    setAddUpdateUser(false)
+                    // console.log(user)
+                }} >Cập nhật</button></td>
+                <td><button className="btn btn-danger" onClick={() => {
                     dispatch(deletedUser(user.taiKhoan))
                 }}>Xóa</button></td>
             </tr>
         })
     }
+    useEffect(() => {
+        dispatch(getAllUser())
+        dispatch(getAllUserPage(1))
+    }, [dispatch])
 
     return (
         <div>
@@ -143,7 +137,10 @@ export default function UsersManagement() {
 
                             <div>
                                 <div className="m-3">
-                                    <AddUser />
+                                    <button data-toggle="modal" data-target="#exampleModal" className="btn btn-warning" onClick={() => {
+                                        setAddUpdateUser(true)
+                                    }} >Thêm thành viên</button>
+
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-6">
@@ -184,7 +181,6 @@ export default function UsersManagement() {
                                                 <th></th>
                                                 <th></th>
                                             </tr>
-
                                         </thead>
                                         <tbody>
                                             {searchValue === "" ? renderAllUserPage() : renderSearch()}
@@ -197,8 +193,13 @@ export default function UsersManagement() {
                         </main>
                     </div>
                 </div>
-            </div>
+                <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        {addUpdateUser ? <AddUser /> : <UpdateUser user={userID} />}
 
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

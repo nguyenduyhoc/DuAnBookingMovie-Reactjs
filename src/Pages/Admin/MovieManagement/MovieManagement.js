@@ -1,21 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllMovieAction, getAllMoviePage } from '../../redux/Action/MovieAction'
+import { deleteMovieAction, getAllMovieAction, getAllMoviePage } from '../../../redux/Action/MovieAction'
 import Pagination from "react-js-pagination";
+import AddMovie from './AddMovie';
 
 export default function MovieManagement() {
     // searchMovie:
-    const { allMovie } = useSelector(state => state.MovieReducer)
+    const { allMovie, allMoviePage } = useSelector(state => state.MovieReducer)
     // console.log(allMovie)
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getAllMovieAction())
-    }, [])
+    // search value for movie 
     const [searchValue, setSearchValue] = useState('')
+    //Pagination:
+    const [state, setState] = useState({
+        activePage: 1
+    })
+
+    // searchValue
     const handleValue = (e) => {
         setSearchValue(e.target.value)
     }
+    // pagination
+    const handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+        const newState = { activePage: pageNumber }
+        setState(newState);
+        dispatch(getAllMoviePage(pageNumber))
+    }
+    // console.log(allMoviePage)
+    let countAllMovie = 0;
+    for (let i = 0; i < allMovie.length; i++) {
+        countAllMovie++
+    }
+    // console.log(countAllMovie)
     const renderMovieSearch = () => {
         let arrayItem = allMovie.filter(id => id.tenPhim?.toLowerCase().includes(searchValue.toLowerCase()))
         return arrayItem.map((movie, index) => {
@@ -30,34 +48,12 @@ export default function MovieManagement() {
                 <img style={{ width: 100 }} src={movie?.hinhAnh} alt={movie?.tenPhim}></img>
                 <td>{movie?.moTa}</td>
                 <td><button className="btn btn-primary">Cập nhật</button></td>
-                <td><button className="btn btn-danger">Xóa</button></td>
+                <td><button className="btn btn-danger" onClick={() => {
+                    dispatch(deleteMovieAction(movie?.maPhim))
+                }}>Xóa</button></td>
             </tr>
         })
     }
-    //Pagination:
-    const [state, setState] = useState({
-        activePage: 1
-    })
-
-    const handlePageChange = (pageNumber) => {
-        console.log(`active page is ${pageNumber}`);
-        const newState = { activePage: pageNumber }
-        setState(newState);
-        dispatch(getAllMoviePage(pageNumber))
-    }
-    useEffect(() => {
-        dispatch(getAllMoviePage(1))
-    }, [])
-
-
-    const { allMoviePage } = useSelector(state => state.MovieReducer)
-    // console.log(allMoviePage)
-    let countAllMovie = 0;
-    for (let i = 0; i < allMovie.length; i++) {
-        countAllMovie++
-    }
-    // console.log(countAllMovie)
-
 
     const renderAllMoviePage = () => {
         return allMoviePage.items?.map((movie, index) => {
@@ -72,10 +68,17 @@ export default function MovieManagement() {
                 <img style={{ width: 100 }} src={movie?.hinhAnh} alt={movie?.tenPhim}></img>
                 <td>{movie?.moTa}</td>
                 <td><button className="btn btn-primary">Cập nhật</button></td>
-                <td><button className="btn btn-danger">Xóa</button></td>
+                <td><button className="btn btn-danger" onClick={() => {
+                    dispatch(deleteMovieAction(movie?.maPhim))
+                }}>Xóa</button></td>
             </tr>
         })
     }
+
+    useEffect(() => {
+        dispatch(getAllMoviePage(1))
+        dispatch(getAllMovieAction())
+    }, [])
     return (
         <div>
             <div>
@@ -133,60 +136,7 @@ export default function MovieManagement() {
                                                         <span aria-hidden="true">×</span>
                                                     </button>
                                                 </div>
-                                                <div className="card-body">
-                                                    <form className="needs-validation" id="foodForm">
-                                                        <div className="row">
-                                                            <div className="col-md-6 mb-3">
-                                                                <label htmlFor="maPhim">Mã phim</label>
-                                                                <input type="text" className="form-control" id="maPhim" placeholder="Nhập mã phim" />
-
-
-                                                            </div>
-                                                            <div className="col-md-6 mb-3">
-                                                                <label htmlFor="tenPhim">Tên phim</label>
-                                                                <input type="text" className="form-control" id="tenPhim" placeholder="Nhập tên phim" required />
-
-                                                            </div>
-                                                            <div className="col-md-6 mb-3">
-                                                                <label htmlFor="biDanh">Bí danh</label>
-                                                                <input type="text" className="form-control" id="biDanh" placeholder="Nhập bí danh" required />
-
-                                                            </div>
-                                                            <div className="col-md-6 mb-3">
-                                                                <label htmlFor="trailer">Link trailer</label>
-                                                                <input type="text" className="form-control" id="trailer" placeholder="Nhập link" required />
-
-                                                            </div>
-                                                            <div className="col-md-6 mb-3">
-                                                                <label htmlFor="ngayKhoichieu">Ngày khởi chiếu</label>
-                                                                <input type="date" className="form-control" id="ngayKhoichieu" placeholder="Nhập ngày" required />
-                                                            </div>
-                                                            <div className="col-md-6 mb-3">
-                                                                <label htmlFor="maNhom">Mã nhóm</label>
-                                                                <input type="text" className="form-control" id="maNhom" placeholder="Nhập mã" required />
-                                                            </div>
-                                                        </div>
-                                                        <div className="mb-3">
-                                                            <div className="form-group">
-
-                                                                <label htmlFor="hinhAnh">Hình Ảnh</label>
-                                                                <input type="text" className="form-control" id="hinhAnh" placeholder="" required />
-                                                            </div>
-                                                        </div>
-                                                        <div className="mb-3">
-                                                            <label htmlFor="moTa">Mô Tả</label>
-                                                            <textarea className="form-control" id="moTa" rows={3} defaultValue={""} />
-                                                            <div id="invalidMoTa" className="invalid-form">
-                                                            </div>
-                                                        </div>
-
-
-                                                    </form>
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button id="btnThemMon" className="btn btn-warning" type="button">Thêm phim</button>
-                                                </div>
+                                                < AddMovie />
                                             </div>
                                         </div>
                                     </div>
