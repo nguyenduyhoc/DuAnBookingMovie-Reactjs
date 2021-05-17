@@ -1,7 +1,38 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { formatDate } from '../../../util/GetDateFormatted'
+import { getCalendarMovieAction } from '../../../redux/Action/CalendarAction'
 
 export default function CalendarMovieManagement() {
+    const dispatch = useDispatch()
+    const formik = useFormik({
+        initialValues: {
+            maPhim: "",
+            maRap: "",
+            giaVe: "",
+            ngayChieuGioChieuValue: "",
+          
+        },
+        validationSchema: Yup.object().shape({
+            maPhim: Yup.string().required('Mã phim không được bỏ trống'),
+            maRap: Yup.string().required('Mã rạp không được bỏ trống'),
+            giaVe: Yup.string().required('Giá vé người dùng không được bỏ trống'),
+        }),
+    })
+
+    // console.log(formik.values)
+    const handleSubmit = () => {
+        const ngayChieuGioChieu = formatDate(formik.values.ngayChieuGioChieuValue)
+        const finalData = { ...formik.values, ngayChieuGioChieu }
+        // console.log(biDanh)
+        if (formik.isValid) {
+            dispatch(getCalendarMovieAction(finalData))
+            console.log(finalData)
+        }
+    }
     return (
         <div>
             <div>
@@ -50,32 +81,32 @@ export default function CalendarMovieManagement() {
                                             <h5>THÊM LỊCH CHIẾU PHIM</h5>
                                         </div>
                                         <div className="card-body">
-                                            <form className="needs-validation" id="foodForm">
+                                            <form onSubmit={formik.handleSubmit}>
                                                 <div className="row">
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="maPhim">Mã phim</label>
-                                                        <input type="text" className="form-control" id="maPhim" placeholder="" />
-
+                                                        <input type="text" className="form-control" id="maPhim" placeholder=""  onChange={formik.handleChange} />
+                                                        <p className="text-danger">{formik.errors.maPhim}</p>
 
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="ngayChieuGioChieu">Ngày chiếu giờ chiếu</label>
-                                                        <input type="text" className="form-control" id="ngayChieuGioChieu" placeholder=" " required />
-
+                                                        <input type="date" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={formik.handleChange}  />
+                                                      
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="maRap">Mã rạp</label>
-                                                        <input type="text" className="form-control" id="maRap" placeholder="" required />
-
+                                                        <input type="text" className="form-control" id="maRap" placeholder=""  onChange={formik.handleChange} required />
+                                                        <p className="text-danger">{formik.errors.maRap}</p>
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="giaVe">Giá vé</label>
-                                                        <input type="text" className="form-control" id="giaVe" placeholder="" required />
-
+                                                        <input type="text" className="form-control" id="giaVe" placeholder=""  onChange={formik.handleChange} required />
+                                                        <p className="text-danger">{formik.errors.giaVe}</p>
                                                     </div>
                                                 </div>
                                                 <hr className="mb-4" />
-                                                <button id="btnThemMon" className="btn btn-warning btn-lg btn-block" type="button">Thêm lịch chiếu</button>
+                                                <button id="btnThemMon" className="btn btn-warning btn-lg btn-block" type="submit" onClick={handleSubmit}>Thêm lịch chiếu</button>
                                             </form>
                                         </div>
                                     </div>
@@ -85,11 +116,12 @@ export default function CalendarMovieManagement() {
                                         <table>
                                             <thead>
                                                 <tr>
+                                                    <th>STT </th>
                                                     <th>Mã phim</th>
                                                     <th>Mã rạp</th>
                                                     <th>Giá vé</th>
                                                     <th>Ngày khởi chiếu</th>
-                                                  
+
                                                     <th></th>
                                                     <th></th>
                                                 </tr>
@@ -97,12 +129,7 @@ export default function CalendarMovieManagement() {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Sieu nhân</td>
-                                                    <td>Sieu nhân</td>
-                                                    <td>Sieu nhân</td>
-                                                    <td>Sieu nhân</td>
-                                                    <td><button className="btn btn-primary">Cập nhật</button></td>
-                                                    <td><button className="btn btn-danger">Xóa</button></td>
+                                                  
                                                 </tr>
 
                                             </tbody>

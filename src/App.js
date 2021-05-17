@@ -19,7 +19,7 @@ import SellTicket from "./Pages/SellTicket/SellTicket";
 import Register from "./Pages/Register/Register";
 import UsersManagement from "./Pages/Admin/UsersManagement/UsersManagement";
 import MovieManagement from "./Pages/Admin/MovieManagement/MovieManagement";
-import CalendarMovieManagement from "./Pages/Admin/CalendarMovieManagement";
+import CalendarMovieManagement from "./Pages/Admin/CalendarManagement/CalendarMovieManagement";
 import UserInformation from "./Pages/Register/UserInformation";
 export const history = createBrowserHistory();
 
