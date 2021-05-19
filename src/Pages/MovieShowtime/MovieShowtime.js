@@ -42,7 +42,7 @@ export default function MovieShowtime(props) {
     const renderPlayVideoMovieShowTime = () => {
         return allMovie.map((movie, index) => {
 
-            return <div className="d-block"  key={index}>
+            return <div className="d-block" key={index}>
                 <PlayVideoMovieShowTime movie={movie} />
             </div>
 
@@ -51,36 +51,38 @@ export default function MovieShowtime(props) {
 
 
     return (
-        <div id="movieSchedule" className="container">
+        <div>
+            <div id="movieSchedule" className="container">
 
-            <ul class="nav nav-pills mb-3 justify-content-center mt-5" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link tabPanel active" id="pills-home-tab" data-toggle="pill" href="#showing" role="tab" aria-controls="pills-home" aria-selected="true">Showing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tabPanel " id="pills-profile-tab" data-toggle="pill" href="#soon" role="tab" aria-controls="pills-profile" aria-selected="false">Soon</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="showing" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div className="container movieSlider">
-                        <Slider {...settings}>
-                            {renderPlayVideoMovieShowTime()}
-                        </Slider>
+                <ul class="nav nav-pills mb-3 justify-content-center mt-5" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link tabPanel active" id="pills-home-tab" data-toggle="pill" href="#showing" role="tab" aria-controls="pills-home" aria-selected="true">Showing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tabPanel " id="pills-profile-tab" data-toggle="pill" href="#soon" role="tab" aria-controls="pills-profile" aria-selected="false">Soon</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="showing" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div className="container movieSlider">
+                            <Slider {...settings}>
+                                {renderPlayVideoMovieShowTime()}
+                            </Slider>
 
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="soon" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div className="container movieSlider" >
-                        <Slider {...settings}>
-                            {renderPlayVideoMovieShowTime()}
-                        </Slider>
+                    <div class="tab-pane fade" id="soon" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div className="container movieSlider" >
+                            <Slider {...settings}>
+                                {renderPlayVideoMovieShowTime()}
+                            </Slider>
 
+                        </div>
                     </div>
+
                 </div>
 
             </div>
-
         </div>
     )
 }

@@ -7,6 +7,7 @@ import { updateInformationUser } from '../../../redux/Action/AdminAction'
 
 export default function UpdateUser(props) {
 
+
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
@@ -26,14 +27,19 @@ export default function UpdateUser(props) {
             maLoaiNguoiDung: Yup.string().required('Mã loại người dùng không được bỏ trống'),
             email: Yup.string().required('Email không được bỏ trống'),
         }),
+        enableReinitialize: true
     })
-    console.log(props.user)
-    console.log(formik.values)
+
     const handleSubmit = () => {
         if (formik.isValid) {
             dispatch(updateInformationUser(formik.values))
         }
     }
+
+    useEffect(() => {
+        console.log(formik.values)
+        return formik.values
+    }, [formik.values])
     return (
         <div className="modal-content">
             <div className="modal-header">
@@ -43,27 +49,27 @@ export default function UpdateUser(props) {
                 </button>
             </div>
             <div className="modal-body">
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} enableReinitialize={formik.enableReinitialize}  >
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="taiKhoan">Tài khoản</label>
-                            <input type="text" className="form-control" id="taiKhoan" disabled defaultValue={props.user.taiKhoan} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                            <input type="text" className="form-control" id="taiKhoan" disabled value={formik.values?.taiKhoan} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <p className="text-danger">{formik.errors.taiKhoan}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="matKhau">Mật khẩu</label>
-                            <input type="text" className="form-control" id="matKhau" defaultValue={props.user.matKhau} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                            <input type="text" className="form-control" id="matKhau" value={formik.values?.matKhau} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <p className="text-danger">{formik.errors.matKhau}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="hoTen">Họ Tên</label>
-                            <input type="text" className="form-control" id="hoTen" defaultValue={props.user.hoTen} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                            <input type="text" className="form-control" id="hoTen" value={formik.values?.hoTen} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <p className="text-danger">{formik.errors.hoTen}</p>
 
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="sdt">Số điện thoại</label>
-                            <input type="number" className="form-control" id="soDt" defaultValue={props.user.soDt} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                            <input type="number" className="form-control" id="soDt" value={formik.values?.soDt} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <p className="text-danger">{formik.errors.soDt}</p>
 
                         </div>
@@ -83,12 +89,12 @@ export default function UpdateUser(props) {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="maNhom">Mã nhóm</label>
-                            <input type="text" className="form-control" id="maNhom" defaultValue="GP02" disabled />
+                            <input type="text" className="form-control" id="maNhom" value="GP02" disabled />
                             <p className="text-danger">{formik.errors.maNhom}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="email">Email</label>
-                            <input type="email" className="form-control" id="email" defaultValue={props.user.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                            <input type="email" className="form-control" id="email" value={formik.initialValues.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <p className="text-danger">{formik.errors.email}</p>
                         </div>
                     </div>

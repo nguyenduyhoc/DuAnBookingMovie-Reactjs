@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function TicketInformation() {
+    const { ticket} = useSelector(state => state.OrderTicketReducer)
+    console.log(ticket)
     return (
         <div>
             <div className="text-white titleInformation">

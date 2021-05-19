@@ -28,9 +28,10 @@ export default function UpdateMovie(props) {
             moTa: Yup.string().required('Mô tả không được bỏ trống'),
             danhGia: Yup.string().required('Đánh giá không được bỏ trống')
         }),
+        enableReinitialize: true
     })
 
-    console.log(formik.values)
+    // console.log(formik.values)
     const handleSubmit = () => {
         const ngayKhoiChieu = formatDate(formik.values.ngayKhoiChieuValue)
         const biDanh = removeAccents(formik.values.tenPhim)
@@ -50,16 +51,16 @@ export default function UpdateMovie(props) {
                 </button>
             </div>
             <div className="card-body">
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} enableReinitialize={formik.enableReinitialize}>
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="tenPhim">Tên phim</label>
-                            <input type="text" className="form-control" id="tenPhim" defaultValue={props.movie?.tenPhim} onChange={formik.handleChange} />
+                            <input type="text" className="form-control" id="tenPhim" value={props.movie?.tenPhim} onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.tenPhim}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="trailer">Link trailer</label>
-                            <input type="text" className="form-control" id="trailer" defaultValue={props.movie?.trailer} onChange={formik.handleChange} />
+                            <input type="text" className="form-control" id="trailer" value={props.movie?.trailer} onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.trailer}</p>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -71,13 +72,12 @@ export default function UpdateMovie(props) {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="danhGia">Đánh giá</label>
-                            <input type="nummber" className="form-control" id="danhGia" defaultValue={props.movie?.danhGia} onChange={formik.handleChange} />
+                            <input type="nummber" className="form-control" id="danhGia" value={props.movie?.danhGia} onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.danhGia}</p>
                         </div>
                     </div>
                     <div className="mb-3">
                         <div className="form-group">
-
                             <label htmlFor="hinhAnh">Hình Ảnh</label>
                             <input type="file" className="form-control" id="hinhAnh" onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.hinhAnh}</p>
@@ -85,7 +85,7 @@ export default function UpdateMovie(props) {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="moTa">Mô Tả</label>
-                        <textarea className="form-control" id="moTa" rows={3} defaultValue={props.movie?.moTa} onChange={formik.handleChange} />
+                        <textarea className="form-control" id="moTa" rows={3} value={props.movie?.moTa} onChange={formik.handleChange} />
                         <p className="text-danger">{formik.errors.moTa}</p>
                         <div id="invalidMoTa" className="invalid-form">
                         </div>

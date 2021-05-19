@@ -49,7 +49,7 @@ export default function UsersManagement() {
                 <td>{item?.taiKhoan}</td>
                 <td>{item?.matKhau}</td>
                 <td>{item?.hoTen}</td>
-                <td>{item?.sdt}</td>
+                <td>{item?.soDt}</td>
                 <td>{item?.maLoaiNguoiDung}</td>
                 <td>{item?.maNhom}</td>
                 <td>{item?.email}</td>
@@ -72,7 +72,7 @@ export default function UsersManagement() {
                 <td>{user?.taiKhoan}</td>
                 <td>{user?.matKhau}</td>
                 <td>{user?.hoTen}</td>
-                <td>{user?.sdt}</td>
+                <td>{user?.soDt}</td>
                 <td>{user?.maLoaiNguoiDung}</td>
                 <td>{user?.maNhom}</td>
                 <td>{user?.email}</td>

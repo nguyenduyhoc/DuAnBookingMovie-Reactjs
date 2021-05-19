@@ -10,6 +10,7 @@ const initialState = {
 
 export const MovieReducer = (state = initialState, action) => {
     // console.log(action)
+    // console.log(action);
     switch (action.type) {
         case GET_ALL_MOVIE: {
             return {...state, allMovie: action.allMovie}

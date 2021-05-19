@@ -2,7 +2,7 @@ import React from 'react'
 
 
 export default function Footer() {
-   
+
     return (
         <div>
             <div>
@@ -26,11 +26,11 @@ export default function Footer() {
                             <div id="footer_connect" className="col-sm-4">
                                 <p className=" title pl-0">Đối tác</p>
                                 <div className="row col-sm-12 partnerLine">
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/CGV-logo.png" alt />
+                                    <a href="https://www.cgv.vn" target="_blank" rel="noreferrer" >
+                                        <img className="iconConnect" src="./img/logo/CGV-logo.png" alt="CGV" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/BHD-logo.png" alt />
+                                    <a href="https://www.bhdstar.vn/"  target="_blank" rel="noreferrer" >
+                                        <img className="iconConnect" src="./img/logo/BHD-logo.png" alt="BHD" />
                                     </a>
                                     <a href="#">
                                         <img className="iconConnect" src="./img/logo/cinestar-logo.png" alt />
@@ -127,7 +127,7 @@ export default function Footer() {
             <a href="mailto:support@tix.vn" style={{ color: '#fb4226' }}>support@tix.vn</a></span>
                             </div>
                             <div className="col-sm-2 col-xs-12 imgFooter">
-                                <a target="_blank" href="http://online.gov.vn/Home/WebDetails/62782"><img className="imgBoCo" alt="Bộ Công Thương" title src="./img/logo/bocongthuong.png" /></a>
+                                <a target="_blank" href="http://online.gov.vn/Home/WebDetails/62782" rel="noreferrer"><img className="imgBoCo" alt="Bộ Công Thương" title src="./img/logo/bocongthuong.png" /></a>
                             </div>
                         </div>
                     </div>

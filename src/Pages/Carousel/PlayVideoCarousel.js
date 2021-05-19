@@ -11,7 +11,7 @@ export default function PlayVideoCarousel() {
 
     useEffect(() => {
         dispatch(getAllMovieAction())
-    }, [])
+    }, [dispatch])
 
     const renderMovieActive = () => {
         return allMovie.splice(0, 1).map((movie, index) => {

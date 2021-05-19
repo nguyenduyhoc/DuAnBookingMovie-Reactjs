@@ -7,7 +7,6 @@ export default function FindMovieBox() {
   const [chosenCinema, setchosenCinema] = useState("");
   const [chosenDate, setchosenDate] = useState("");
   const { allMovie, detailMovie } = useSelector((state) => state.MovieReducer);
-
   const dispatch = useDispatch();
 
   function removeDuplicates(array) {
@@ -30,6 +29,7 @@ export default function FindMovieBox() {
   };
 
   const renderChooseMovie = () => {
+    console.log(allMovie);
     return allMovie.map((movie, index) => {
       return (
         <option value={movie.maPhim} key={index}>
