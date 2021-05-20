@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDetailMovieAction } from "../../redux/Action/MovieAction";
+import axios from "axios";
 
 export default function FindMovieBox() {
+  const [chosenMovie, setchosenMovie] = useState("");
   const [chosenCinemaBrand, setchosenCinemaBrand] = useState("");
   const [chosenCinema, setchosenCinema] = useState("");
   const [chosenDate, setchosenDate] = useState("");
-  const { allMovie, detailMovie } = useSelector((state) => state.MovieReducer);
+
+  const { allMovie } = useSelector((state) => state.MovieReducer);
   const dispatch = useDispatch();
 
   function removeDuplicates(array) {
@@ -19,17 +21,19 @@ export default function FindMovieBox() {
     return a;
   }
 
-  const handleChange = (e) => {
-    let {
-      findBoxChooseCinema,
-      findBoxChooseMovie,
-      findBoxChooseDate,
-      findBoxChooseWhen,
-    } = e.target;
+  const getDetailMovie = async (maPhim) => {
+    try {
+      const result = await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`,
+        method: "GET",
+      });
+      setchosenMovie(result.data);
+    } catch (errors) {
+      console.log("errors", errors.response?.data);
+    }
   };
 
   const renderChooseMovie = () => {
-    console.log(allMovie);
     return allMovie.map((movie, index) => {
       return (
         <option value={movie.maPhim} key={index}>
@@ -39,7 +43,7 @@ export default function FindMovieBox() {
     });
   };
   const renderChooseCinemaBrand = () => {
-    return detailMovie.heThongRapChieu?.map((cinemaBrand, index) => {
+    return chosenMovie.heThongRapChieu?.map((cinemaBrand, index) => {
       return (
         <option value={cinemaBrand.maHeThongRap} key={index}>
           {cinemaBrand.tenHeThongRap}
@@ -95,7 +99,7 @@ export default function FindMovieBox() {
             class="form-control form-control-lg "
             name="findBoxChooseMovie"
             onChange={(e) => {
-              dispatch(getDetailMovieAction(e.target.value));
+              getDetailMovie(e.target.value);
             }}
           >
             <option value="" hidden>
@@ -108,11 +112,10 @@ export default function FindMovieBox() {
             name="findBoxChooseMovie"
             onChange={(e) => {
               setchosenCinemaBrand(
-                detailMovie.heThongRapChieu.find(
+                chosenMovie.heThongRapChieu.find(
                   (item) => item.maHeThongRap === e.target.value
                 )
               );
-              //   dispatch(getDetailMovieAction(chosenMovie));
             }}
           >
             <option value="" hidden>
