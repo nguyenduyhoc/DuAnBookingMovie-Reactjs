@@ -1,29 +1,43 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getCinemaBrandAction,
-  getCinemaAction,
-  getCinemaScheduleAction,
-} from "../../redux/Action/CinemaAction";
+import axios from "axios";
 
 export default function Cinema() {
+  const [allCinemaBrand, setallCinemaBrand] = useState([]);
+  const [allCinemaSchedule, setallCinemaSchedule] = useState("");
   const [cinemaBrandId, setCinemaBrandId] = useState("");
   const [cinemaId, setCinemaId] = useState("");
-  const { allCinemaBrand, allCinema, allCinemaSchedule } = useSelector(
-    (state) => state.CinemaReducer
-  );
 
-  const dispatch = useDispatch();
-  console.log("He thong", allCinemaBrand);
-  console.log("Rap", allCinema);
+  const getCinemaBrand = async () => {
+    try {
+      const result = await axios({
+        url: "https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap",
+        method: "GET",
+      });
+      setallCinemaBrand(result.data);
+      setCinemaBrandId(result.data[0]?.maHeThongRap);
+    } catch (errors) {
+      console.log("errors", errors.response?.data);
+    }
+  };
+
+  const getCinemaSchedule = async (Brand) => {
+    try {
+      const result = await axios({
+        url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${Brand}&maNhom=GP02`,
+        method: "GET",
+      });
+      setallCinemaSchedule(result.data);
+      setCinemaId(result.data[0]?.lstCumRap[0].maCumRap);
+    } catch (errors) {
+      console.log("errors", errors.response?.data);
+    }
+  };
 
   useEffect(() => {
-    dispatch(getCinemaBrandAction());
-    setCinemaBrandId(allCinemaBrand[0]?.maHeThongRap);
-    dispatch(getCinemaScheduleAction(cinemaBrandId));
-    setCinemaId(allCinemaSchedule[0]?.lstCumRap[0].maCumRap);
+    getCinemaBrand();
+    getCinemaSchedule(cinemaBrandId);
   }, []);
 
   const renderLogoCinema = () => {
@@ -33,9 +47,7 @@ export default function Cinema() {
           <a
             className="nav-link"
             onClick={() => {
-              setCinemaBrandId(cinema.maHeThongRap);
-              dispatch(getCinemaScheduleAction(cinema.maHeThongRap));
-              setCinemaId(allCinemaSchedule[0]?.lstCumRap[0].maCumRap);
+              getCinemaSchedule(cinema.maHeThongRap);
             }}
           >
             <img src={cinema.logo} alt={cinema.maHeThongRap} />
