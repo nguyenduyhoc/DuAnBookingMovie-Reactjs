@@ -36,9 +36,6 @@ export default function UserInformation() {
 
 
     }
-    // useEffect(() => {
-    //     updateInformationUser(formik.values)
-    //   },[formik.values])
     return (
         <div>
             <div className="container rounded bg-white mt-5 mb-5">

@@ -10,7 +10,6 @@ import { scrollSmoothTo } from '../../util/ScrollSmoothTo'
 
 
 export default function Header() {
-    var location = Location
     const { taiKhoan } = useSelector(state => state.UsersReducer)
     return (
         <div>

@@ -45,6 +45,8 @@ export const updateInformationUser = (updateUser) => {
             })
             // Checked
             dispatch({ type: "LOGOUT" })
+            localStorage.removeItem('USER_LOGIN')
+            localStorage.removeItem('ACCESS_TOKEN')
             history.push('/login')
             alert("Cập nhật thành công ,vui lòng đăng nhập lại để tiếp tục")
         } catch (errors) {

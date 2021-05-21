@@ -1,11 +1,12 @@
 import React from 'react';
 import Slider from "react-slick";
 import PlayVideoMovieShowTime from './PlayVideoMovieShowingTime';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 
 export default function MovieShowtime(props) {
+
     const { allMovie } = useSelector(state => state.MovieReducer)
     // console.log(allMovie)
     const settings = {

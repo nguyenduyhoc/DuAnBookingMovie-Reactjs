@@ -21,6 +21,7 @@ export default function FindMovieBox() {
     return a;
   }
 
+
   const getDetailMovie = async (maPhim) => {
     try {
       const result = await axios({
@@ -95,9 +96,7 @@ export default function FindMovieBox() {
         id="findMovieTools"
       >
         <div className="findMovieBox">
-          <select
-            class="form-control form-control-lg "
-            name="findBoxChooseMovie"
+          <select class="form-control form-control-lg "name="findBoxChooseMovie"
             onChange={(e) => {
               getDetailMovie(e.target.value);
             }}
@@ -107,10 +106,9 @@ export default function FindMovieBox() {
             </option>
             {renderChooseMovie()}
           </select>
-          <select
-            class="form-control form-control-lg "
-            name="findBoxChooseMovie"
-            onChange={(e) => {
+
+          <select class="form-control form-control-lg " name="findBoxChooseMovie"
+              onChange={(e) => {
               setchosenCinemaBrand(
                 chosenMovie.heThongRapChieu.find(
                   (item) => item.maHeThongRap === e.target.value
