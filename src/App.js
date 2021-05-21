@@ -40,7 +40,7 @@ function App(props) {
         <Route exact path="/admin/UsersManagement"  component={UsersManagement} />
         <Route exact path="/admin/MovieManagement"  component={MovieManagement} />
         <Route exact path="/admin/CalendarMovieManagement"  component={CalendarMovieManagement} />
-        <Route exact path="/sellticket"  component={SellTicket} />
+        <Route exact path="/sellticket/:movieid"  component={SellTicket} />
         <Route exact  path="/"  component={Home} />
         <Route path="*" component={Home} />
       </Switch>

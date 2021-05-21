@@ -4,7 +4,7 @@ import { AdminReducer } from './Reducers/AdminReducer';
 import { CalendarReducer } from './Reducers/CalendarReducer';
 import { CinemaReducer } from './Reducers/CinemaReducer';
 import { MovieReducer } from './Reducers/MovieReducer';
-import { OrderTicketReducer } from './Reducers/OrderTicketReducer';
+import { TicketReducer } from './Reducers/TicketReducer';
 import { UsersReducer } from './Reducers/UsersReducer';
 
 
@@ -14,6 +14,6 @@ UsersReducer,
 CinemaReducer,
 AdminReducer,
 CalendarReducer,
-OrderTicketReducer
+TicketReducer
 })
 export const store = createStore(rootReducer,applyMiddleware(reduxThunk))

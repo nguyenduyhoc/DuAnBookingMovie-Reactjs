@@ -32,65 +32,65 @@ export default function Footer() {
                                     <a href="https://www.bhdstar.vn/"  target="_blank" rel="noreferrer" >
                                         <img className="iconConnect" src="./img/logo/BHD-logo.png" alt="BHD" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/cinestar-logo.png" alt />
+                                    <a href="http://cinestar.com.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/cinestar-logo.png" alt="Cinestar" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/DDC-logo.png" alt />
+                                    <a href="http://ddcinema.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/DDC-logo.png" alt="ddcinema" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/galaxy-cinema-logo.png" alt />
-                                    </a>
-                                </div>
-                                <div className="row col-sm-12 partnerLine">
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/ivb-logo.png" alt />
-                                    </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/laban-logo.png" alt />
-                                    </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/megaGS-logo.png" alt />
-                                    </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/starlight-logo.png" alt />
-                                    </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/touch-logo.png" alt />
+                                    <a href="https://www.galaxycine.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/galaxy-cinema-logo.png" alt="GalaxyCinema" />
                                     </a>
                                 </div>
                                 <div className="row col-sm-12 partnerLine">
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/vietcombank-logo.png" alt />
+                                    <a href="https://www.indovinabank.com.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/ivb-logo.png" alt="IBV"/>
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/vietin-logo.png" alt />
+                                    <a href="https://laban.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/laban-logo.png" alt="Laban" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/zion-logo.jpg" alt />
+                                    <a href="#https://www.megagscinemas.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/megaGS-logo.png" alt="megaGS" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/zalo_logo.png" alt />
+                                    <a href="http://starlight.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/starlight-logo.png" alt="Starlight" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/logo2.png" alt />
+                                    <a href="https://touchcinema.com/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/touch-logo.png" alt="TouchCinema" />
                                     </a>
                                 </div>
                                 <div className="row col-sm-12 partnerLine">
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/123go-logo.png" alt />
+                                    <a href="https://portal.vietcombank.com.vn/Pages/Home.aspx" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/vietcombank-logo.png" alt="vietcombank" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/zion-logo.jpg" alt />
+                                    <a href="https://www.vietinbank.vn/web/home/vn/ind" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/vietin-logo.png" alt="viettin" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/logo5.png" alt />
+                                    <a href="https://www.zion.com/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/zion-logo.jpg" alt="zion" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/vietin-logo.png" alt />
+                                    <a href="https://zalopay.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/zalo_logo.png" alt="zalopay" />
                                     </a>
-                                    <a href="#">
-                                        <img className="iconConnect" src="./img/logo/touch-logo.png" alt />
+                                    <a href="http://cinestar.com.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/logo2.png" alt="cinestar" />
+                                    </a>
+                                </div>
+                                <div className="row col-sm-12 partnerLine">
+                                    <a href="https://webv3.123go.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/123go-logo.png" alt="123go" />
+                                    </a>
+                                    <a href="https://www.zion.com/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/zion-logo.jpg" alt="zion" />
+                                    </a>
+                                    <a href="https://megags.vn/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/logo5.png" alt="mega" />
+                                    </a>
+                                    <a href="https://www.vietinbank.vn/web/home/vn/index.html" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/vietin-logo.png" alt="logo" />
+                                    </a>
+                                    <a href="https://touchcinema.com/" target="_blank" rel="noreferrer">
+                                        <img className="iconConnect" src="./img/logo/touch-logo.png" alt="touchLogo" />
                                     </a>
                                 </div>
                             </div>
@@ -98,13 +98,13 @@ export default function Footer() {
                                 <div className="row">
                                     <div className="col-xs-6 text-center">
                                         <p className="title">MOBILE APP</p>
-                                        <a href="#" title="apple app"><img className="social_image_logo" src="./img/logo/apple-logo.png" alt /></a>
-                                        <a href="#" title="android app"><img className="social_image_logo" src="./img/logo/android-logo.png" alt /></a>
+                                        <a href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197" target="_blank" rel="noreferrer" title="apple app"><img className="social_image_logo" src="./img/logo/apple-logo.png" alt="TixMNoblie" /></a>
+                                        <a href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123" target="_blank" rel="noreferrer" title="android app"><img className="social_image_logo" src="./img/logo/android-logo.png" alt="TixSocail" /></a>
                                     </div>
                                     <div className="col-xs-6 text-center ml-4">
                                         <p className="title">SOCIAL</p>
-                                        <a href="#" title="facebook"><img className="social_image_logo" src="./img/logo/facebook-logo.png" alt /></a>
-                                        <a href="#" title="zalo"><img className="social_image_logo" src="./img/logo/zalo-logo.png" alt /></a>
+                                        <a href="https://www.facebook.com/tix.vn/" target="_blank" rel="noreferrer" title="facebook"><img className="social_image_logo" src="./img/logo/facebook-logo.png" alt="Facebook" /></a>
+                                        <a href="https://zalo.me/tixdatve" target="_blank" rel="noreferrer" title="zalo"><img className="social_image_logo" src="./img/logo/zalo-logo.png" alt="Zalo" /></a>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ export default function Footer() {
                         <hr />
                         <div className="row " id="contentFooter">
                             <div className="col-sm-1 imgFooter">
-                                <img className="zion_icon" src="./img/logo/zion-logo.jpg" alt />
+                                <img className="zion_icon" src="./img/logo/zion-logo.jpg" alt="Zion" />
                             </div>
                             <div className="col-sm-9 infoFooter">
                                 <span>TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION</span>

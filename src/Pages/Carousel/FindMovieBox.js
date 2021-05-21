@@ -19,15 +19,6 @@ export default function FindMovieBox() {
     return a;
   }
 
-  const handleChange = (e) => {
-    let {
-      findBoxChooseCinema,
-      findBoxChooseMovie,
-      findBoxChooseDate,
-      findBoxChooseWhen,
-    } = e.target;
-  };
-
   const renderChooseMovie = () => {
     console.log(allMovie);
     return allMovie.map((movie, index) => {
@@ -91,28 +82,22 @@ export default function FindMovieBox() {
         id="findMovieTools"
       >
         <div className="findMovieBox">
-          <select
-            class="form-control form-control-lg "
-            name="findBoxChooseMovie"
+          <select class="form-control form-control-lg "name="findBoxChooseMovie"
             onChange={(e) => {
               dispatch(getDetailMovieAction(e.target.value));
-            }}
-          >
-            <option value="" hidden>
-              Choose Movie
-            </option>
+            }} >
+            <option value="" hidden>Choose Movie</option>
             {renderChooseMovie()}
           </select>
-          <select
-            class="form-control form-control-lg "
-            name="findBoxChooseMovie"
-            onChange={(e) => {
+
+          <select class="form-control form-control-lg " name="findBoxChooseMovie"
+              onChange={(e) => {
               setchosenCinemaBrand(
                 detailMovie.heThongRapChieu.find(
                   (item) => item.maHeThongRap === e.target.value
                 )
               );
-              //   dispatch(getDetailMovieAction(chosenMovie));
+            
             }}
           >
             <option value="" hidden>

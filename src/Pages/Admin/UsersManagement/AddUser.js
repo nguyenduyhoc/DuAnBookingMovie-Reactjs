@@ -28,7 +28,7 @@ export default function AddUser() {
 
     const handleSubmit = () => {
         if (formik.isValid) {
-            console.log(formik.values)
+            // console.log(formik.values)
             dispatch(addUser(formik.values))
         }
     }

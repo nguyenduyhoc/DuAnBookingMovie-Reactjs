@@ -1,17 +1,85 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { getDetailMovieAction } from '../../redux/Action/MovieAction'
-import PlayVideo from '../Carousel/PlayVideo'
+
 
 
 export default function Detail(props) {
     // console.log(props)
+    const [chosenCinemaBrand, setchosenCinemaBrand] = useState("");
+    const [chosenCinema, setchosenCinema] = useState("");
+    const [chosenDate, setchosenDate] = useState("");
+    const [chosenTime ,setchosenTime] =useState("");
+    const [chosenmaLichChieu ,setchosenmaLichChieu] =useState("");
+
     const { detailMovie } = useSelector(state => state.MovieReducer)
+
     const dispatch = useDispatch()
     const id = props.match.params.id
+
     useEffect(() => {
         dispatch(getDetailMovieAction(id))
     }, [])
+    useEffect(() => {
+        console.log(`${chosenDate}T${chosenTime}`)
+        setchosenmaLichChieu(chosenCinema?.lichChieuPhim?.find(item => item.ngayChieuGioChieu === `${chosenDate}T${chosenTime}`).maLichChieu)
+    }, [chosenTime])
+    function removeDuplicates(array) {
+        let a = [];
+        array?.map((x, index) => {
+            if (!a.includes(x)) {
+                a.push(x);
+            }
+        });
+        return a;
+    }
+    const renderChooseCinemaBrand = () => {
+        return detailMovie.heThongRapChieu?.map((cinemaBrand, index) => {
+            return (
+                <option value={cinemaBrand.maHeThongRap} key={index}>
+                    {cinemaBrand.tenHeThongRap}
+                </option>
+            );
+        });
+    };
+    const renderChooseCinema = () => {
+        return chosenCinemaBrand.cumRapChieu?.map((cinema, index) => {
+            return (
+                <option value={cinema.maCumRap} key={index}>
+                    {cinema.tenCumRap}
+                </option>
+            );
+        });
+    };
+    const renderChooseDate = () => {
+        let DateTimeArr = chosenCinema.lichChieuPhim?.map((item, index) => {
+            return item.ngayChieuGioChieu.split("T")[0];
+        });
+        let DateArr = removeDuplicates(DateTimeArr);
+        return DateArr.map((item, index) => {
+            return (
+                <option value={item} key={index}>
+                    {item}
+                </option>
+            );
+        });
+    };
+    const renderChooseTime = () => {
+        let DateTimeArr = chosenCinema.lichChieuPhim?.map((item, index) => {
+            return item.ngayChieuGioChieu.split("T");
+        });
+        return DateTimeArr?.filter((item) => item[0] === chosenDate).map(
+            (item, index) => {
+                return (
+                    <option value={item[1]} key={index}>
+                        {item[1]}
+                    </option>
+                );
+            }
+        );
+    };
+
     return (
         <div className="detail ">
             <div className="container">
@@ -20,321 +88,74 @@ export default function Detail(props) {
 
                         <img style={{ marginTop: '20px', width: '80%' }} src={detailMovie.hinhAnh} alt="hinhAnh" />
                     </div>
-                    <div className="col-4 contentDetail">
+                    <div className="col-8 contentDetail">
                         <h2>{detailMovie.ngayKhoiChieu}</h2>
                         <h2>{detailMovie.tenPhim}</h2>
-                        <button className="btn btn-danger">Buy Ticket</button>
-                    </div>
-                    <div className="col-4">
+                        <div className="mt-5" >
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="exampleFormControlSelect1 " className="text-white">Chọn rạp, thời gian</label>
+                                    <div className="d-flex w-100">
+                                        <select className="form-control w-100" id="exampleFormControlSelect1"
+                                            onChange={(e) => {
+                                                setchosenCinemaBrand(
+                                                    detailMovie?.heThongRapChieu.find(item => item.maHeThongRap === e.target.value)
+                                                )
+                                            }}>
+                                            <option value="" hidden>Choose Cinema</option>
+                                            {renderChooseCinemaBrand()}
+                                        </select>
+                                        <select className="form-control" id="exampleFormControlSelect1"
+                                            onChange={(e) => {
 
+                                                setchosenCinema(
+                                                    chosenCinemaBrand?.cumRapChieu.find(
+                                                        (item) => item.maCumRap === e.target.value
+                                                    )
+                                                );
+                                            }}
+                                        >
+                                            <option value="" hidden>Choose Cinema Branch</option>
+                                            {renderChooseCinema()}
+                                        </select>
+                                        <select className="form-control" id="exampleFormControlSelect1"
+                                            onChange={(e) =>
+                                                setchosenDate(
+                                                    e.target.value
+                                                )}
+                                        >
+                                            <option value="" hidden>Date </option>
+                                            {renderChooseDate()}
+                                        </select>
+                                        <select className="form-control" id="exampleFormControlSelect1"
+                                         onChange={(e) => { setchosenTime(
+                                                    e.target.value
+                                                )
+                                            }
+                                        }>
+                                            <option value="" hidden>Time </option>
+                                           {renderChooseTime()}
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <Link className="btn btn-danger" to={`/sellticket/${chosenmaLichChieu}`} as={Link}>Mua vé</Link>
                     </div>
+
                 </div>
-                <div className="container">
-                    <ul class="nav nav-pills mb-3 justify-content-center mt-5" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a style={{ color: 'red' }} class="nav-link tabPanel active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Calendar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style={{ color: 'red' }} class="nav-link tabPanel" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style={{ color: 'red' }} class="nav-link tabPanel" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Review</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content  imgNews" id="pills-tabContent">
-                        <div class="tab-pane fade show active " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <div id="homeCinemaHeadBackground">
-
-                            </div>
-                            <div style={{ backgroundColor: "white" }} id="homeCinemaComplex" className="row session-main">
-                                <ul className="col-md-1 nav nav-tabs listPCinemas">
-                                    <li className="nav-item active">
-                                        <a href="#" className="nav-link">
-                                            <img src="./img/logo/logo1.png" alt />
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="" className="nav-link">
-                                            <img src="./img/logo/logo2.png" alt />
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="#" className="nav-link">
-                                            <img src="./img/logo/logo3.png" alt />
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="#" className="nav-link">
-                                            <img src="./img/logo/logo4.jpg" alt />
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="#" className="nav-link">
-                                            <img src="./img/logo/logo5.png" alt />
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="#" className="nav-link">
-                                            <img src="./img/logo/galaxy-cinema-logo.png" alt />
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div id="listCinemas" className="col-md-4 bg-white">
-                                    <div className="cinemas active">
-                                        <img className="cinemasImage" src="./img/Cinema/bhd-star-bitexco-16105952137769.png" alt />
-                                        <div className="wrapInfo">
-                                            <span className="nameCinema"><span className="colorCinema BHD">BHD Star</span> - Bitexco</span>
-                                            <span className="infoMovieCinema">L3-Bitexco Icon 68, 2 Hải Triều, Q.1</span>
-                                            <span className="detailMovieCinema">
-                                                <a href="#">[chi tiết]</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="cinemas">
-                                        <img className="cinemasImage" src="./img/Cinema/bhd-star-bitexco-16105952137769.png" alt />
-                                        <div className="wrapInfo">
-                                            <span className="nameCinema">
-                                                <span className="colorCinema BHD">BHD Star</span>
-                                        - Vincom Thảo Điền
-                                </span>
-                                            <span className="infoMovieCinema">L5-MegaMall, 159 XL Hà Nội, Q.2</span>
-                                            <span className="detailMovieCinema">
-                                                <a href="#">[chi tiết]</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="cinemas">
-                                        <img className="cinemasImage" src="./img/Cinema/bhd-star-vincom-3-2-16105957596860.png" alt />
-                                        <div className="wrapInfo">
-                                            <span className="nameCinema"><span className="colorCinema BHD">BHD Star</span> - Vincom 3/2
-                                 </span>
-                                            <span className="infoMovieCinema">L5-Vincom 3/2, 3C Đường 3/2, Q.10</span>
-                                            <span className="detailMovieCinema">
-                                                <a href="#">[chi tiết]</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="cinemas">
-                                        <img className="cinemasImage" src="./img/Cinema/bhd-star-pham-hung-16105959230642.png" alt />
-                                        <div className="wrapInfo">
-                                            <span className="nameCinema"><span className="colorCinema BHD">BHD Star</span> - Phạm Hùng</span>
-                                            <span className="infoMovieCinema">L4-Satra Phạm Hùng, C6/27 Phạm Hùng, Bình Chánh</span>
-                                            <span className="detailMovieCinema">
-                                                <a href="#">[chi tiết]</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="cinemas">
-                                        <img className="cinemasImage" src="./img/Cinema/bhd-star-vincom-quang-trung-16105960645760.png" alt />
-                                        <div className="wrapInfo">
-                                            <span className="nameCinema"><span className="colorCinema BHD">BHD Star</span> - Vincom Quang Trung
-            </span>
-                                            <span className="infoMovieCinema">B1-Vincom QT, 190 Quang Trung, Gò Vấp</span>
-                                            <span className="detailMovieCinema">
-                                                <a href="#">[chi tiết]</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="cinemas">
-                                        <img className="cinemasImage" src="./img/Cinema/bhd-star-vincom-le-van-viet-16105962051265.png" alt />
-                                        <div className="wrapInfo">
-                                            <span className="nameCinema"><span className="colorCinema BHD">BHD Star</span> - Vincom Lê Văn Việt
-            </span>
-                                            <span className="infoMovieCinema">L4-Vincom Plaza, 50 Lê Văn Việt, Quận 9</span>
-                                            <span className="detailMovieCinema">
-                                                <a href="#">[chi tiết]</a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="listMovie" className="col-md-7 bg-white">
-                                    <div className="wrapMovie panel">
-                                        <div className="movieInfo">
-                                            <img src="./img/Movie/tom-jerry-16127706651597_60x60.png" className="movieImage" alt />
-                                            <div className="wrapInfo">
-                                                <p>
-                                                    <span className="ageTag ageTag-general">P</span>
-                                                    <span className="movieTitle">Tom &amp; Jerry</span>
-                                                </p>
-                                                <p>100 phút - TIX 7.7 - IMDb 0</p>
-                                            </div>
-                                        </div>
-                                        <div className="movieSession collapse in">
-                                            <div className="listTagTime">
-                                                <div className="movieVersion">2D Digital</div>
-                                                <div className="timeSession">
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">17:15</span> - 18:55
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">19:10</span> - 20:50
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">20:45</span> - 22:25
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">22:00</span> - 23:40
-                </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="wrapMovie panel">
-                                        <div className="movieInfo">
-                                            <img src="./img/Movie/lua-deu-gap-lua-dao-the-con-heartist-c16-16082739589858_60x60.png" className="movieImage" alt />
-                                            <div className="wrapInfo">
-                                                <p>
-                                                    <span className="ageTag">C16</span>
-                                                    <span className="movieTitle">Lừa Đểu Gặp Lừa Đảo - The Con-Heartist</span>
-                                                </p>
-                                                <p>128 phút - TIX 8.8 - IMDb 0</p>
-                                            </div>
-                                        </div>
-                                        <div className="movieSession collapse in">
-                                            <div className="listTagTime">
-                                                <div className="movieVersion">2D Digital</div>
-                                                <div className="timeSession">
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">17:15</span> - 18:55
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">19:10</span> - 20:50
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">22:00</span> - 23:40
-                </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="wrapMovie panel">
-                                        <div className="movieInfo">
-                                            <img src="./img/Movie/tazza-than-bip-jack-chot-tazza-one-eyed-jack-c13-16127716280582_60x60.png" className="movieImage" alt />
-                                            <div className="wrapInfo">
-                                                <p>
-                                                    <span className="ageTag">C13</span>
-                                                    <span className="movieTitle">Tazza: Thần Bịp Jack Chột - Tazza: One Eyed Jack</span>
-                                                </p>
-                                                <p>139 phút - TIX 8.3 - IMDb 0</p>
-                                            </div>
-                                        </div>
-                                        <div className="movieSession collapse in">
-                                            <div className="listTagTime">
-                                                <div className="movieVersion">2D Digital</div>
-                                                <div className="timeSession">
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">17:15</span> - 18:55
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">19:10</span> - 20:50
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">22:00</span> - 23:40
-                </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="wrapMovie panel">
-                                        <div className="movieInfo">
-                                            <img src="./img/Movie/kieu-16137205526238_60x60.png" className="movieImage" alt />
-                                            <div className="wrapInfo">
-                                                <p>
-                                                    <span className="ageTag">C18</span>
-                                                    <span className="movieTitle">Kiều @</span>
-                                                </p>
-                                                <p>0 phút - TIX 7.5 - IMDb 0</p>
-                                            </div>
-                                        </div>
-                                        <div className="movieSession collapse in">
-                                            <div className="listTagTime">
-                                                <div className="movieVersion">2D Digital</div>
-                                                <div className="timeSession">
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">17:15</span> -
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">19:10</span> -
-                </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="wrapMovie panel">
-                                        <div className="movieInfo">
-                                            <img src="./img/Movie/sieu-trom-duong-pho-16139791273302_60x60.png" className="movieImage" alt />
-                                            <div className="wrapInfo">
-                                                <p>
-                                                    <span className="ageTag">C16</span>
-                                                    <span className="movieTitle">Siêu Trộm Đường Phố</span>
-                                                </p>
-                                                <p>90 phút - TIX 5.5 - IMDb 0</p>
-                                            </div>
-                                        </div>
-                                        <div className="movieSession collapse in">
-                                            <div className="listTagTime">
-                                                <div className="movieVersion">2D Digital</div>
-                                                <div className="timeSession">
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">17:15</span> - 18:55
-                </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="wrapMovie panel">
-                                        <div className="movieInfo">
-                                            <img src="./img/Movie/palm-springs-mo-mat-thay-hom-qua-16142434274044_60x60.jpg" className="movieImage" alt />
-                                            <div className="wrapInfo">
-                                                <p>
-                                                    <span className="ageTag ageTag-general">P</span>
-                                                    <span className="movieTitle">PALM SPRINGS: Mở mắt thấy hôm qua</span>
-                                                </p>
-                                                <p>90 phút - TIX 5.5 - IMDb 0</p>
-                                            </div>
-                                        </div>
-                                        <div className="movieSession collapse in">
-                                            <div className="listTagTime">
-                                                <div className="movieVersion">2D Digital</div>
-                                                <div className="timeSession">
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">17:15</span> - 18:55
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">19:10</span> - 20:50
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">20:45</span> - 22:25
-                </a>
-                                                    <a className="movieTimeSession" href="#">
-                                                        <span className="movie-start-time">22:00</span> - 23:40
-                </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div></div></div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <div className="row textInformation">
-                                <div className="col-3">
-                                    <h5>Ngày công chiếu</h5>
-                                    <h5>Đánh giá</h5>
-                                </div>
-                                <div className="col-3">
-                                    <p>{detailMovie.ngayKhoiChieu}</p>
-                                   <p>{detailMovie.danhGia}</p>
-                                </div>
-                                <div className="col-6" >
-                                    <h5>Nội dung</h5>
-                                    <p>{detailMovie.moTa}</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-
-                        </div>
+                <div className="row container text-white">
+                    <div className="col-3">
+                        <h5>Ngày công chiếu</h5>
+                        <p>{detailMovie.ngayKhoiChieu}</p>
+                    </div>
+                    <div className="col-3">
+                        <h5>Đánh giá</h5>
+                        <p>{detailMovie.danhGia}</p>
+                    </div>
+                    <div className="col-6" >
+                        <h5>Nội dung</h5>
+                        <p>{detailMovie.moTa}</p>
                     </div>
                 </div>
 
