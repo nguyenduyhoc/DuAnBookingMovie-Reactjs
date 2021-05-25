@@ -5,15 +5,19 @@
  // // NavBar
   .nav-link {
     justify-content:space-between;
-   
     color: $color-black-0;
-    transition: all 0.3s;
+      transition: all 0.3s;
+      font-size: 20px;
     .btnHeader{
       font-size: 20px;
+      color: $color-black-0;
+      transition: all 0.3s;
+      padding: 30px ;
     }
     &:hover {
       .btnHeader{
         color: $color-red-0;
+        text-decoration: none;
       }
         
     }

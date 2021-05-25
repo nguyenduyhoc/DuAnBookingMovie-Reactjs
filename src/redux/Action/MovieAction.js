@@ -64,6 +64,23 @@ export const addMovieAction = (movie) => {
           Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
         },
       });
+      if (movie.picture) {
+        let frm = new FormData();
+        frm.append('file', movie.picture)
+        frm.append('tenPhim', result.data.tenPhim)
+        frm.append('maNhom', 'GP02')
+        let result1 = await axios({
+          url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim`,
+          method: "POST",
+          data: frm,
+          headers: {
+            Authorization: `Bearer` + localStorage.getItem(ACCESS_TOKEN),
+          },
+        });
+      
+        console.log(result1.data);
+      }
+      console.log(result.data);
       alert("Thêm phim thành công !!");
     } catch (errors) {
       alert("Thêm phim không thành công !!");
@@ -105,6 +122,24 @@ export const updateMovieAction = (updateMovie) => {
           Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
         },
       });
+      if (updateMovie.picture) {
+        let frm = new FormData();
+        frm.append('file', updateMovie.picture)
+        frm.append('tenPhim', result.data.tenPhim)
+        frm.append('maNhom', 'GP02')
+        let result1 = await axios({
+          url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim`,
+          method: "POST",
+          data: frm,
+          headers: {
+            Authorization: `Bearer` + localStorage.getItem(ACCESS_TOKEN),
+          },
+        });
+      
+        // console.log(result1.data);
+      }
+      // console.log(result.data);
+
       dispatch(getAllMoviePage());
       dispatch(getAllMovieAction());
       alert("Cập nhật phim thành công !!");

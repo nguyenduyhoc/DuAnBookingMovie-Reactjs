@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { updateInformationUser } from '../../../redux/Action/AdminAction'
+import { phoneRegex } from '../../../util/Setting'
 
 
 export default function UpdateUser(props) {
@@ -23,7 +24,7 @@ export default function UpdateUser(props) {
             taiKhoan: Yup.string().required('Tài khoản không được bỏ trống'),
             matKhau: Yup.string().min(2, "Mật khẩu tối thiểu 2 ký tự").max(32, "Mật khẩu tối đa 32 ký tự"),
             hoTen: Yup.string().required('Họ tên không được bỏ trống'),
-            soDt: Yup.string().required('Số điện thoại không được bỏ trống'),
+            soDt: Yup.string().matches(phoneRegex, 'Số điện thoại không đúng định dạng'),
             maLoaiNguoiDung: Yup.string().required('Mã loại người dùng không được bỏ trống'),
             email: Yup.string().required('Email không được bỏ trống'),
         }),
@@ -36,10 +37,10 @@ export default function UpdateUser(props) {
         }
     }
 
-    useEffect(() => {
-        console.log(formik.values)
-        return formik.values
-    }, [formik.values])
+    // useEffect(() => {
+    //     console.log(formik.values)
+    //     return formik.values
+    // }, [formik.values])
     return (
         <div className="modal-content">
             <div className="modal-header">
@@ -69,7 +70,7 @@ export default function UpdateUser(props) {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="sdt">Số điện thoại</label>
-                            <input type="number" className="form-control" id="soDt" value={formik.values?.soDt} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                            <input type="text" className="form-control" id="soDt" value={formik.values?.soDt} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <p className="text-danger">{formik.errors.soDt}</p>
 
                         </div>

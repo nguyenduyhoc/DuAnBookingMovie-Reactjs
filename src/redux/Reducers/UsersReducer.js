@@ -1,7 +1,7 @@
 
 let user = {};
 let taiKhoan = "";
-let userRegister = {}
+
 if (localStorage.getItem('USER_LOGIN')) {
     let userLogin = JSON.parse(localStorage.getItem('USER_LOGIN'))
     user = userLogin
@@ -11,19 +11,27 @@ if (localStorage.getItem('USER_LOGIN')) {
 const stateDefault = {
     user: user,
     taiKhoan: taiKhoan,
-    allUser: []
+    allUser: [],
+    userInformation: [],
+    userLoading: true
 }
 
 export const UsersReducer = (state = stateDefault, action) => {
     switch (action.type) {
         case "LOGIN-SUCCESS": {
-            return { ...state, user: action.user, taiKhoan: action.user.taiKhoan }
+            return { ...state, user: action.user, taiKhoan: action.user.taiKhoan,userLoading: false }
         }
         case "LOGOUT": {
             state.user = {};
             state.taiKhoan = '';
-            return { ...state }
+            return { ...state, userLoading: false  }
         }
+        case "USER_INFORMATION": {
+            return { ...state, userInformation : action.userInformation ,userLoading: false  }
+        }
+        case "RESET_LOADING": {
+            return { ...state, userLoading: true }
+          }
         // case "REGISTER": {
         //     return { ...state, userRegister: action.userRegister }
         // }

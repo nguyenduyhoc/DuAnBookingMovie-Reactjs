@@ -10,7 +10,6 @@ export const loginAction = (userLogin) => {
                 url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap',
                 method: 'POST',
                 data: userLogin
-
             })
             // console.log('result', result.data);
             dispatch({
@@ -25,7 +24,7 @@ export const loginAction = (userLogin) => {
             history.push('/');
 
         }
-        
+
         catch (errors) {
             alert('Tài khoản không tồn tại!')
             console.log('errors', errors.response?.data)
@@ -57,6 +56,27 @@ export const updateInformationUser = (updateUser) => {
     }
 }
 
+export const userInformationAction = (userID) => {
+
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan`,
+                method: 'POST',
+                data: userID,
+            })
+            dispatch({
+                type: "USER_INFORMATION",
+                userInformation: result.data
+            })
+           
+
+        } catch (errors) {
+            console.log('errors', errors.response?.data)
+        }
+    }
+}
+
 export const registerAction = (userRegister) => {
     return async (dispatch) => {
         try {
@@ -64,20 +84,20 @@ export const registerAction = (userRegister) => {
                 url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy',
                 method: 'POST',
                 data: userRegister
-
             })
             console.log('result', result.data)
             alert('Đăng ký thành công!')
             history.push('/login');
 
         }
-        
+
         catch (errors) {
             alert('Đăng ký không thành công')
-            console.log('errors', errors.response?.data ,errors.response?.status)
+            console.log('errors', errors.response?.data, errors.response?.status)
         }
     }
 }
+
 
 
 

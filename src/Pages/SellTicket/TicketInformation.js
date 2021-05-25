@@ -1,6 +1,8 @@
-import { Field, useFormik } from 'formik'
+
+
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import {history} from '../../App'
 import { orderTicket } from '../../redux/Action/TicketAction'
 
 export default function TicketInformation(props) {
@@ -31,7 +33,7 @@ export default function TicketInformation(props) {
     return (
         <div>
             <div className="text-white titleInformation">
-                <h3 className="text-center ">Danh sách ghế đang đặt</h3>
+                <h3 >Danh sách ghế đang đặt</h3>
                 <div>
                     <button className="ghe"></button>Ghế thường
                  </div>
@@ -67,13 +69,18 @@ export default function TicketInformation(props) {
                             <th>{danhSachGheDangChon.reduce((tong, item, index) => {
                                 return tong += item.giaVe
                             }, 0).toLocaleString()} VNĐ</th>
-                            <th><button className="btn btn-success" onClick={() => {
+                            {taiKhoan === '' ? <th><button className="btn btn-success" onClick={() => {
+                                alert("Vui lòng đăng nhập để đặt vé")
+                                history.push('/login')
+                            }}>Đặt vé</button></th> : <th><button className="btn btn-success" onClick={() => {
                                 dispacth(orderTicket({
                                     maLichChieu: props.maLichChieu,
                                     danhSachVe: ticketOrderList,
                                     taiKhoanNguoiDung: taiKhoan
+
                                 }))
-                            }}>Đặt vé</button></th>
+                            }}>Đặt vé</button></th>}
+
                         </tr> : ''}
                     </tfoot>
                 </table>

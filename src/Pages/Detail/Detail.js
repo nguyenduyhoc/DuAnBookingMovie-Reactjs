@@ -10,21 +10,23 @@ export default function Detail(props) {
     const [chosenCinemaBrand, setchosenCinemaBrand] = useState("");
     const [chosenCinema, setchosenCinema] = useState("");
     const [chosenDate, setchosenDate] = useState("");
-    const [chosenTime ,setchosenTime] =useState("");
-    const [chosenmaLichChieu ,setchosenmaLichChieu] =useState("");
-
+    const [chosenTime, setchosenTime] = useState("");
+    const [chosenmaLichChieu, setchosenmaLichChieu] = useState("");
     const { detailMovie } = useSelector(state => state.MovieReducer)
-
+    // console.log(detailMovie?.ngayKhoiChieu)
     const dispatch = useDispatch()
     const id = props.match.params.id
+    const [buttonForSellTikcet, setbuttonForSellTikcet] = useState(true)
+
 
     useEffect(() => {
         dispatch(getDetailMovieAction(id))
     }, [])
     useEffect(() => {
-        console.log(`${chosenDate}T${chosenTime}`)
+        // console.log(`${chosenDate}T${chosenTime}`)
         setchosenmaLichChieu(chosenCinema?.lichChieuPhim?.find(item => item.ngayChieuGioChieu === `${chosenDate}T${chosenTime}`).maLichChieu)
     }, [chosenTime])
+
     function removeDuplicates(array) {
         let a = [];
         array?.map((x, index) => {
@@ -79,33 +81,44 @@ export default function Detail(props) {
             }
         );
     };
+    const resetCinemaOption = (id) => {
+        document.getElementById(id).value = ""
+    }
+
 
     return (
-        <div className="detail ">
-            <div className="container">
-                <div className="row mt-5">
-                    <div className="col-4 container-fluid mt-5 ">
+        <div className="detail" style={{backgroundImage: `url(${detailMovie.hinhAnh})`}}>
+            <div className="container" id="responsiveDetail">
+                <div className="row mt-5" id="imgDetail">
+                    <div className="col-4 container-fluid mt-5" >
 
-                        <img style={{ marginTop: '20px', width: '80%' }} src={detailMovie.hinhAnh} alt="hinhAnh" />
+                        <img  style={{ marginTop: '20px', width: '100%' }} src={detailMovie.hinhAnh} alt="hinhAnh" />
                     </div>
-                    <div className="col-8 contentDetail">
-                        <h2>{detailMovie.ngayKhoiChieu}</h2>
-                        <h2>{detailMovie.tenPhim}</h2>
-                        <div className="mt-5" >
+                    <div className="col-8 contentDetail text-white">
+                        <h3>Ngày công chiếu</h3>
+                        <span>{detailMovie?.ngayKhoiChieu?.split("T")[0]}</span>
+                        <h3>Tên Phim</h3>
+                        <span>{detailMovie.tenPhim}</span>
+                        <div >
                             <form>
                                 <div className="form-group">
-                                    <label htmlFor="exampleFormControlSelect1 " className="text-white">Chọn rạp, thời gian</label>
-                                    <div className="d-flex w-100">
-                                        <select className="form-control w-100" id="exampleFormControlSelect1"
+                                    <label htmlFor="exampleFormControlSelect1 " className="text-white"></label>
+                                    <div className="w-100" id="findMovieBoxDetail">
+                                        <select className="form-control selectBox" id="chooseCinemaBrand"
                                             onChange={(e) => {
                                                 setchosenCinemaBrand(
                                                     detailMovie?.heThongRapChieu.find(item => item.maHeThongRap === e.target.value)
                                                 )
+                                                setbuttonForSellTikcet(true)
+                                                resetCinemaOption("chooseCinema")
+                                                resetCinemaOption("chosenDate")
+                                                resetCinemaOption("chosenTinme")
+                                                
                                             }}>
-                                            <option value="" hidden>Choose Cinema</option>
+                                            <option value="" hidden>Choose Cinema Brand</option>
                                             {renderChooseCinemaBrand()}
                                         </select>
-                                        <select className="form-control" id="exampleFormControlSelect1"
+                                        <select className="form-control selectBox" id="chooseCinema"
                                             onChange={(e) => {
 
                                                 setchosenCinema(
@@ -113,41 +126,49 @@ export default function Detail(props) {
                                                         (item) => item.maCumRap === e.target.value
                                                     )
                                                 );
+                                                setbuttonForSellTikcet(true)
+                                                resetCinemaOption("chosenDate")
+                                                resetCinemaOption("chosenTinme")
                                             }}
                                         >
-                                            <option value="" hidden>Choose Cinema Branch</option>
+                                            <option value="" hidden>Choose Cinema</option>
                                             {renderChooseCinema()}
                                         </select>
-                                        <select className="form-control" id="exampleFormControlSelect1"
-                                            onChange={(e) =>
+                                        <select className="form-control selectBox" id="chosenDate"
+                                            onChange={(e) => {
                                                 setchosenDate(
                                                     e.target.value
-                                                )}
+                                                )
+                                                setbuttonForSellTikcet(true)
+                                                resetCinemaOption("chosenTinme")
+                                            }}
                                         >
                                             <option value="" hidden>Date </option>
                                             {renderChooseDate()}
                                         </select>
-                                        <select className="form-control" id="exampleFormControlSelect1"
-                                         onChange={(e) => { setchosenTime(
+                                        <select className="form-control selectBox" id="chosenTinme"
+                                            onChange={(e) => {
+                                                setchosenTime(
                                                     e.target.value
                                                 )
+                                                setbuttonForSellTikcet(false)
                                             }
-                                        }>
+                                            }>
                                             <option value="" hidden>Time </option>
-                                           {renderChooseTime()}
+                                            {renderChooseTime()}
                                         </select>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <Link className="btn btn-danger" to={`/sellticket/${chosenmaLichChieu}`} as={Link}>Mua vé</Link>
-                    </div>
+                        {buttonForSellTikcet ? <button className="btn btn-danger" onClick={() => { alert("Vui lòng chọn đầy đủ thông tin") }}>Mua vé</button> : <Link className="btn btn-danger" to={`/sellticket/${chosenmaLichChieu}`} type="button" >Mua vé</Link>}
 
+                    </div>
                 </div>
-                <div className="row container text-white">
+                <div className="row container text-white detailContentResponsive mt-5">
                     <div className="col-3">
-                        <h5>Ngày công chiếu</h5>
-                        <p>{detailMovie.ngayKhoiChieu}</p>
+                        <h5>Giờ công chiếu</h5>
+                        <p>{detailMovie?.ngayKhoiChieu?.split("T")[1]}</p>
                     </div>
                     <div className="col-3">
                         <h5>Đánh giá</h5>
@@ -158,8 +179,6 @@ export default function Detail(props) {
                         <p>{detailMovie.moTa}</p>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

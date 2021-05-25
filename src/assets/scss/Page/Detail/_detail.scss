@@ -1,24 +1,82 @@
-@import '../../Helper/variable';
-@import '../../Helper/mixin';
+@import "../../Helper/variable";
+@import "../../Helper/mixin";
 
-.detail{
-    background-image: url('../../../img/backapp.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 2000px;
+.detail {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1300px;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.898);
 }
 
-.contentDetail{
-    margin-top: 15%;
-    p,h2{
-        color: $color-white-0 ;
-    }
+.contentDetail {
+  margin-top: 15%;
+  p,
+  h2 {
+    color: $color-white-0;
+  }
 }
-.textInformation{
-    p,h5{
-        color: $color-white-0;
-        font-weight: bold;
+.textInformation {
+  p,
+  h5 {
+    color: $color-white-0;
+    font-weight: bold;
+  }
+}
+.selectBox {
+    width: 80%;
+  height: 50px !important;
+  margin: 5px;
+}
+// Responisve
+#responsiveDetail {
+  @include Responsive(xl) {
+    .detail {
+      height: 990px;
     }
-
+   
+  }
+  @include Responsive(md) {
+  }
+  @include Responsive(sm) {
+    #imgDetail {
+      display: block;
+      .col-4 {
+        max-width: 100%;
+      }
+      img {
+        margin: 50px 0 0 0 !important;
+        width: 250px !important;
+        height: 100%;
+      }
+      .selectBox {
+        
+        height: 50px !important;
+        margin: 5px;
+      }
+    }
+    #findMovieBoxDetail {
+      display: block;
+    }
+    .detailContentResponsive {
+      display: flex;
+     
+    }
+  }
+  @include Responsive(xs) {
+    #imgDetail {
+      display: block;
+    }
+    #findMovieBoxDetail {
+      display: block;
+    }
+    .detailContentResponsive {
+      display: flex;
+    }
+    .selectBox {
+        height: 50px !important;
+        margin: 5px;
+      }
+  }
 }

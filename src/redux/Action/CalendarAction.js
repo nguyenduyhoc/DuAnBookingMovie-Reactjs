@@ -10,9 +10,11 @@ export const getCalendarMovieAction = (calendarMovie) => {
                 data: calendarMovie,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
             })
+            alert("Tạo lịch chiếu thành công")
             // console.log('result', result.data);
           
         } catch (errors) {
+            alert("Tạo lịch chiếu thất bại")
             console.log('errors', errors.response?.data)
         }
     }

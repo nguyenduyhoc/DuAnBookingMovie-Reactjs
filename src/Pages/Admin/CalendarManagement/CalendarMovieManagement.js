@@ -1,38 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
+import { getAllMovieAction, getDetailMovieAction } from '../../../redux/Action/MovieAction'
+import { Autocomplete } from '@material-ui/lab'
+import { TextField } from '@material-ui/core'
+import { getCinemaAction, getCinemaBrandAction } from '../../../redux/Action/CinemaAction'
 import { formatDate } from '../../../util/GetDateFormatted'
 import { getCalendarMovieAction } from '../../../redux/Action/CalendarAction'
 
 export default function CalendarMovieManagement() {
-    const dispatch = useDispatch()
-    const formik = useFormik({
-        initialValues: {
-            maPhim: "",
-            maRap: "",
-            giaVe: "",
-            ngayChieuGioChieuValue: "",
-          
-        },
-        validationSchema: Yup.object().shape({
-            maPhim: Yup.string().required('Mã phim không được bỏ trống'),
-            maRap: Yup.string().required('Mã rạp không được bỏ trống'),
-            giaVe: Yup.string().required('Giá vé người dùng không được bỏ trống'),
-        }),
-    })
+    const { allMovie} = useSelector(state => state.MovieReducer)
+    const { allCinema, allCinemaBrand } = useSelector(state => state.CinemaReducer)
+   
+    const [maPhim, setMaPhim] = useState('')
+    const [ngayChieu, setNgayChieu] = useState('')
+    const [gioChieu, setGioChieu] = useState('')
+    const [giaVe, setGiaVe] = useState('')
+    const [tenRap, setTenRap] = useState('')
+    const [arrMaRap, setArrMaRap] = useState('')
+    const [maRap, setMaRap] = useState('')
 
-    // console.log(formik.values)
-    const handleSubmit = () => {
-        const ngayChieuGioChieu = formatDate(formik.values.ngayChieuGioChieuValue)
-        const finalData = { ...formik.values, ngayChieuGioChieu }
-        // console.log(biDanh)
-        if (formik.isValid) {
-            dispatch(getCalendarMovieAction(finalData))
-            console.log(finalData)
-        }
-    }
+
+
+   
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllMovieAction())
+        dispatch(getCinemaBrandAction())
+        dispatch(getDetailMovieAction(maPhim))
+        dispatch(getCinemaAction(tenRap))
+    }, [dispatch, maPhim, tenRap])
+
+    console.log(allCinemaBrand)
     return (
         <div>
             <div>
@@ -45,12 +44,12 @@ export default function CalendarMovieManagement() {
                 </nav>
                 <div className="container-fluid">
                     <div className="row">
-                        <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                        <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar ">
                             <div className="sidebar-sticky pt-3">
                                 <ul className="nav flex-column">
                                     <li className="nav-item">
                                         <NavLink className="nav-link active" to='/admin/UsersManagement' >
-                                            Quản lý người dùng <span className="sr-only">(current)</span>
+                                            Quản lý người dùng
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
@@ -81,62 +80,116 @@ export default function CalendarMovieManagement() {
                                             <h5>THÊM LỊCH CHIẾU PHIM</h5>
                                         </div>
                                         <div className="card-body">
-                                            <form onSubmit={formik.handleSubmit}>
+                                            <form >
                                                 <div className="row">
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="maPhim">Mã phim</label>
-                                                        <input type="text" className="form-control" id="maPhim" placeholder=""  onChange={formik.handleChange} />
-                                                        <p className="text-danger">{formik.errors.maPhim}</p>
+                                                        <label htmlFor="maPhim">Tên phim</label>
+                                                        <Autocomplete
+                                                            id="combo-box-demo"
+                                                            options={allMovie}
+                                                            name="maPhim"
+                                                            getOptionLabel={(option) => option?.tenPhim}
+                                                            onChange={(e, value) => {
+                                                                setMaPhim(value?.maPhim)
+                                                       
+                                                            }}
+                                                            disableClearable={true}
+
+                                                            renderInput={(params) => <TextField {...params} label="Tên phim" variant="outlined" />}
+                                                        />
+
 
                                                     </div>
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="ngayChieuGioChieu">Ngày chiếu giờ chiếu</label>
-                                                        <input type="date" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={formik.handleChange}  />
-                                                      
+                                                        <label htmlFor="ngayChieuGioChieu">Ngày chiếu </label>
+                                                        <input type="date" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={(e) => {
+                                                            setNgayChieu(e.target?.value)
+                                                        }} />
                                                     </div>
+
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="maRap">Mã rạp</label>
-                                                        <input type="text" className="form-control" id="maRap" placeholder=""  onChange={formik.handleChange} required />
-                                                        <p className="text-danger">{formik.errors.maRap}</p>
+                                                        <label htmlFor="maRap">Tên rạp</label>
+                                                        <Autocomplete
+                                                            
+                                                          
+                                                            id="combo-box-demo"
+                                                            options={allCinemaBrand}
+                                                            getOptionLabel={(option) => option?.maHeThongRap}
+                                                            onChange={(e, value) => {
+                                                                setTenRap(value?.maHeThongRap)
+                                                    
+                                                            }}
+                                                            disableClearable={true}
+                                                            renderInput={(params) => <TextField {...params} label="Tên rạp" variant="outlined" />}
+                                                        />
+
+                                                    </div>
+
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="ngayChieuGioChieu">Giờ chiếu</label>
+                                                        <input type="time" step="1" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={(e) => {
+                                                            setGioChieu(e.target?.value)
+                                                        }} />
+                                                    </div>
+
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="maRap">Địa chỉ rạp</label>
+                                                        <Autocomplete
+                                                            disabled={maPhim === '' || tenRap === ''}
+                                                            id="combo-box-demo"
+                                                            options={allCinema}
+                                                       
+                                                            getOptionLabel={(option) => option?.diaChi}
+                                                            onChange={(e, value) => {
+                                                                setArrMaRap(value?.danhSachRap)
+                                                            }}
+                                                            disableClearable={true}
+
+                                                            renderInput={(params) => <TextField {...params} label="Địa chỉ rạp" variant="outlined" />}
+                                                        />
+
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="giaVe">Giá vé</label>
-                                                        <input type="text" className="form-control" id="giaVe" placeholder=""  onChange={formik.handleChange} required />
-                                                        <p className="text-danger">{formik.errors.giaVe}</p>
+                                                        <input type="text" className="form-control" id="giaVe" placeholder="" required onChange={(e) => {
+                                                            setGiaVe(e.target?.value)
+                                                        }} />
+
+                                                    </div>
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="maRap">Mã rạp</label>
+                                                        <Autocomplete
+                                                            disabled={maPhim === '' || tenRap === '' || arrMaRap === ''}
+
+                                                            id="combo-box-demo"
+                                                            options={arrMaRap}
+                                                            getOptionLabel={(option) => option?.maRap.toString()}
+                                                            onChange={(e, value) => {
+                                                                setMaRap(value?.maRap)
+
+                                                            }}
+                                                            disableClearable={true}
+
+                                                            renderInput={(params) => <TextField {...params} label="Mã rạp" variant="outlined" />}
+                                                        />
+
                                                     </div>
                                                 </div>
+
+
+
                                                 <hr className="mb-4" />
-                                                <button id="btnThemMon" className="btn btn-warning btn-lg btn-block" type="submit" onClick={handleSubmit}>Thêm lịch chiếu</button>
+                                                <button id="btnThemMon" className="btn btn-warning btn-lg btn-block" type="submit" onClick={() => {
+                                                    dispatch(getCalendarMovieAction({
+                                                        maPhim,
+                                                        ngayChieuGioChieu: formatDate(ngayChieu) + " " + gioChieu,
+                                                        maRap,
+                                                        giaVe
+                                                    }))
+                                                }}>Thêm lịch chiếu</button>
                                             </form>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="table">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>STT </th>
-                                                    <th>Mã phim</th>
-                                                    <th>Mã rạp</th>
-                                                    <th>Giá vé</th>
-                                                    <th>Ngày khởi chiếu</th>
-
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                  
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-
                                 </div>
 
                             </div>
@@ -145,6 +198,6 @@ export default function CalendarMovieManagement() {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }

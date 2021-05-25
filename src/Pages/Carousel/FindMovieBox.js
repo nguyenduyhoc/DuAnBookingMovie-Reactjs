@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function FindMovieBox() {
   const [chosenMovie, setchosenMovie] = useState("");
   const [chosenCinemaBrand, setchosenCinemaBrand] = useState("");
   const [chosenCinema, setchosenCinema] = useState("");
   const [chosenDate, setchosenDate] = useState("");
-
+  const [chosenTime, setchosenTime] = useState("");
+  const [chosenmaLichChieu, setchosenmaLichChieu] = useState("");
   const { allMovie } = useSelector((state) => state.MovieReducer);
-  const dispatch = useDispatch();
-
+ 
   function removeDuplicates(array) {
     let a = [];
     array?.map((x, index) => {
@@ -20,6 +21,10 @@ export default function FindMovieBox() {
     });
     return a;
   }
+
+  useEffect(() => {
+    setchosenmaLichChieu(chosenCinema?.lichChieuPhim?.find(item => item.ngayChieuGioChieu === `${chosenDate}T${chosenTime}`)?.maLichChieu)
+}, [chosenTime])
 
 
   const getDetailMovie = async (maPhim) => {
@@ -102,7 +107,7 @@ export default function FindMovieBox() {
             }}
           >
             <option value="" hidden>
-              Choose Movie
+              Tên phim
             </option>
             {renderChooseMovie()}
           </select>
@@ -117,7 +122,7 @@ export default function FindMovieBox() {
             }}
           >
             <option value="" hidden>
-              Choose Cinema Brand
+            Tên Rạp
             </option>
             {renderChooseCinemaBrand()}
           </select>
@@ -133,7 +138,7 @@ export default function FindMovieBox() {
             }}
           >
             <option value="" hidden>
-              Cinema
+              Địa chỉ
             </option>
             {renderChooseCinema()}
           </select>
@@ -145,19 +150,21 @@ export default function FindMovieBox() {
             }}
           >
             <option value="" hidden>
-              Date
+              Ngày tháng
             </option>
             {renderChooseDate()}
           </select>
-          <select class="form-control form-control-lg" name="findBoxChooseWhen">
+          <select class="form-control form-control-lg" name="findBoxChooseWhen" onChange={(e) => {
+              setchosenTime(e.target.value);
+            }}>
             <option value="" hidden>
-              When
+              Thời gian
             </option>
             {renderChooseTime()}
           </select>
         </div>
 
-        <button className="btn btn-secondary">Buy Ticket</button>
+        <Link className="btn btn-danger"  to={`/sellticket/${chosenmaLichChieu}`} >Mua vé</Link>
       </div>
     </div>
   );

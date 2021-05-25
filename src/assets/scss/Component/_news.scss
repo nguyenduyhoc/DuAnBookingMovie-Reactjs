@@ -1,63 +1,78 @@
-@import '../Helper/variable';
-@import '../Helper/mixin';
+@import "../Helper/variable";
+@import "../Helper/mixin";
 .imgNews {
-    img {
-        border-radius: 5px;
+  img {
+    border-radius: 5px;
+  }
+  button {
+    background-color: $color-none;
+  }
+  a {
+    text-decoration: none;
+    color: $color-black-0;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.5s;
+    &:hover {
+      color: $color-red-0;
     }
-    button{
-        background-color:  $color-none;
+  }
+  .stepImg {
+    a {
+      font-size: 15px;
+      font-weight: normal;
     }
-    
+  }
 }
 
-.imgNews{
-    .row {
-    @include Responsive(xl){
-     img{
+.imgNews {
+  .row {
+    @include Responsive(xl) {
+      img {
         width: 100%;
-     }
-       
+      }
     }
-    @include Responsive(md){
-    img{
-         width: 100%;
-     }
-        
+    @include Responsive(md) {
+      img {
+        width: 100%;
+      }
     }
-    @include Responsive(sm){
-        display: inline-block;
-        img{
-            width: 350px !important  ;
+    @include Responsive(sm) {
+      display: inline-block;
+      .col-6,
+      .col-4{
+          max-width: none;
+      }
+      img {
+        width: 350px !important  ;
+      }
+      .stepImg {
+        img {
+          width: 100px !important;
         }
-        .stepImg {
-            img{ 
-                width: 100px !important
-            }
-            .stepContent{
-                display: flex;
-            } 
-            
+        .stepContent {
+          display: flex;
         }
-        
-      
+      }
     }
-    @include Responsive(xs){
-        
-        display: inline-block;
-        img{
-            width: 350px !important  ;
+    @include Responsive(xs) {
+      display: inline-block;
+      .col-6,
+      .col-4{
+          max-width: none;
+      }
+      img {
+        width: 370px !important  ;
+      }
+      .stepImg {
+          max-width: none;
+        img {
+          width: 100px !important;
         }
-        .stepImg {
-            img{
-                
-                width: 100px !important
-            }
-            .stepContent{
-                display: flex;
-            } 
+        .stepContent {
+          display: flex;
         }
-
-        
+      }
     }
-}
+  }
 }

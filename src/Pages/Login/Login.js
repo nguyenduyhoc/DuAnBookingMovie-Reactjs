@@ -22,29 +22,50 @@ export default function Login() {
             // console.log(values)
         }
     })
-    
+
     return (
-        <div id="wrapLoginApp">
+        <div id="wrapLoginApp"  >
             <div id="loginApp">
-                <div className="modal-dialog">
-                    <div className="modal-content" >
+                <div className="signin__wrapper">
+                    <div>
                         <form className="container" onSubmit={formik.handleSubmit}   >
-                            <h3>Login</h3>
+                            <img className="logoWeb text-center" src={require("../../assets/img/logo/logoWeb.png").default} alt="logoWeb" />
+                            <h3>Đăng nhập</h3>
+                            
+                            <div className="form-group mt-5">
+                            <p>Đăng nhập để được nhiều ưu đãi, mua vé và bảo mật thông tin!</p>
+                                <div className="input-group-prepend">
+                                    <a class="signin-btn" href="https://www.facebook.com/">
+                                        <img class="signin-logo" src={require("../../assets/img/SignIn/download.png").default} alt="facebook" />
+                                    </a>
+                                </div>
+                            </div>
                             <div className="form-group">
-                                <p>User Name: </p>
-                                <input className="form-control" type="text" name="taiKhoan" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <div className="input-group-prepend">
+                                    <a class="signin-btn" href="https://stc.chat.zalo.me/">
+                                        <img class="signin-logo" src={require("../../assets/img/SignIn/zaloLogin.png").default} alt="facebook" />
+                                    </a>
+                                </div>
+                            </div>
+                            <p style={{fontSize:'10px'}}>Hoặc</p>
+                            <div className="form-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user" /> </span>
+                                    <input className="form-control" placeholder="Tài khoản" id="taiKhoan" type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} />
+                                </div>
                                 <p className="text-danger">{formik.errors.taiKhoan}</p>
                             </div>
                             <div className="form-group">
-                                <p>Password: </p>
-                                <input type="password" className="form-control" name="matKhau" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                                    <input className="form-control" placeholder="Mật khẩu" id="matKhau" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
+                                </div>
                                 <p className="text-danger">{formik.errors.matKhau}</p>
                             </div>
-
+                            <p className="text-center">Bạn chưa có tài khoản ?  <NavLink className="text-danger" to="/register">Đăng ký</NavLink> </p>
                             {/* Modal footer */}
                             <div className="modal-footer">
-                                <NavLink to="/"><button type="button" className="btn btn-danger" data-dismiss="modal">Close</button></NavLink>
-                                <button type="button" className="btn btn-success" onClick={formik.handleSubmit}>Login</button>
+                                <button type="submit" className="btn btn-success" onClick={formik.handleSubmit}>Login</button>
                             </div>
                         </form>
                     </div>

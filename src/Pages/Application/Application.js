@@ -27,48 +27,48 @@ export default function Application() {
                                         <br />
                                         <button id="app_buttonLeft">App miễn phí - Tải về ngay</button>
                                         <p className="app_textUnder">
-                                            TIX có 2 phiên bản <a href="#">IOS</a>
-                                            <a className="ml-2" href="#">Android</a>
+                                            TIX có 2 phiên bản <a href="https://apps.apple.com/us/app/123phim-mua-ve-lien-tay-chon/id61518619">IOS</a>
+                                            <a className="ml-2" href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123">Android</a>
                                         </p>
                                     </div>
                                     <div className="col-md-6 app_content_right">
-                                        <img className="phone_img" src="./img/Footer/mobile.png" alt />
+                                        <img className="phone_img" src="./img/Footer/mobile.png" alt="carousel-application" />
                                         <div className="app_phoneSlider slick">
                                             <Slider {...settings}>
 
                                                 <div>
-                                                    <img src="./img/Footer/slide2.jpg" alt />
+                                                    <img src="./img/Footer/slide2.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide4.jpg" alt />
+                                                    <img src="./img/Footer/slide4.jpg" alt="carousel-application" />
                                                 </div>
 
                                                 <div>
-                                                    <img src="./img/Footer/slide3.jpg" alt />
+                                                    <img src="./img/Footer/slide3.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide5.jpg" alt />
+                                                    <img src="./img/Footer/slide5.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide6.jpg" alt />
+                                                    <img src="./img/Footer/slide6.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide7.jpg" alt />
+                                                    <img src="./img/Footer/slide7.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide8.jpg" alt />
+                                                    <img src="./img/Footer/slide8.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide11.jpg" alt />
+                                                    <img src="./img/Footer/slide11.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide12.jpg" alt />
+                                                    <img src="./img/Footer/slide12.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide13.jpg" alt />
+                                                    <img src="./img/Footer/slide13.jpg" alt="carousel-application" />
                                                 </div>
                                                 <div>
-                                                    <img src="./img/Footer/slide9.jpg" alt />
+                                                    <img src="./img/Footer/slide9.jpg" alt="carousel-application" />
                                                 </div>
 
 

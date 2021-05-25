@@ -3,9 +3,11 @@ import React from 'react'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../../../redux/Action/AdminAction'
+import { phoneRegex } from '../../../util/Setting'
 
 export default function AddUser() {
     const dispatch = useDispatch()
+
     const formik = useFormik({
         initialValues: {
             taiKhoan: '',
@@ -20,7 +22,7 @@ export default function AddUser() {
             taiKhoan: Yup.string().required('Tài khoản không được bỏ trống'),
             matKhau: Yup.string().required('Mật khẩu không được bỏ trống').min(2, "Mật khẩu tối thiểu 2 ký tự").max(32, "Mật khẩu tối đa 32 ký tự"),
             hoTen: Yup.string().required('Họ tên không được bỏ trống'),
-            soDt: Yup.string().required('Số điện thoại không được bỏ trống'),
+            soDt: Yup.string().matches(phoneRegex,"Số điện thoại không hợp lệ "),
             maLoaiNguoiDung: Yup.string().required('Mã loại người dùng không được bỏ trống'),
             email: Yup.string().required('Email không được bỏ trống'),
         }),
@@ -59,8 +61,8 @@ export default function AddUser() {
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="sdt">Số điện thoại</label>
-                            <input type="number" className="form-control" id="soDt" placeholder="Nhập số điện thoại" onChange={formik.handleChange} />
-                            <p className="text-danger">{formik.errors.sdt}</p>
+                            <input type="text" className="form-control" id="soDt" placeholder="Nhập số điện thoại" onChange={formik.handleChange} />
+                            <p className="text-danger">{formik.errors.soDt}</p>
 
                         </div>
                         <div className="col-md-6 mb-3">

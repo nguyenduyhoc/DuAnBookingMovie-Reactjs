@@ -34,7 +34,7 @@ export const orderTicket = (ticket) => { // Tai khoan va mat khau
             })
             alert('Đặt vé thành công')
         } catch (errors) {
-            alert('Đặt vé thất bại')
+            alert(`Đặt vé thất bại`)
             console.log('errors', errors.response?.data)
         }
     }

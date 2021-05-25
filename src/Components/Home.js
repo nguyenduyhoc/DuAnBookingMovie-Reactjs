@@ -7,15 +7,17 @@ import Footer from './Footer/Footer'
 import Application from '../Pages/Application/Application'
 
 
-export default function Home(props) {
-    return (
-        <div>
-          <Carousel />
-          <MovieShowtime />
-          <Cinema />
-          <News />
-          <Application />
-          <Footer />          
-        </div>
-    )
+
+export default function Home() {
+
+  return (
+    <div>
+      <Carousel />
+      <MovieShowtime />
+      <Cinema />
+      <News />
+      <Application />
+      <Footer />
+    </div>
+  )
 }

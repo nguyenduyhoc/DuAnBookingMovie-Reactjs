@@ -12,7 +12,6 @@
 @import './Component/playVideoShowingMovieTime';
 @import './Component/news';
 @import './Component/responsiveVideo';
-@import './Component/moolight';
 //Layout
 @import './Layout/body';
 @import './Layout/header';
@@ -27,6 +26,7 @@
 @import './Page/Ticket/ticket';
 @import './Page/Admin/navbarAdmin';
 @import './Page/UserInformation/userInformation';
+@import './Page//UpdateMovie/updateMovie';
 //Vendor
 @import './Vendor/SlickCarouselFixed/slickCarousel';
 @import 'node_modules/react-modal-video/scss/modal-video.scss';

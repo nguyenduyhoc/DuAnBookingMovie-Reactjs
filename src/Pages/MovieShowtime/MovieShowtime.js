@@ -1,9 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
 import PlayVideoMovieShowTime from './PlayVideoMovieShowingTime';
-import { useDispatch, useSelector } from 'react-redux'
-
-
+import {useSelector } from 'react-redux'
 
 export default function MovieShowtime(props) {
 
@@ -22,15 +20,15 @@ export default function MovieShowtime(props) {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 1.5,
+                    slidesToShow: 1.4,
                     slidesPerRow: 2,
                     row: 1,
                 }
             },
             {
-                breakpoint: 719,
+                breakpoint: 767,
                 settings: {
-                    slidesToShow: 1.5,
+                    slidesToShow: 0.325,
                     slidesPerRow: 1,
                     row: 1,
 
@@ -57,10 +55,10 @@ export default function MovieShowtime(props) {
 
                 <ul class="nav nav-pills mb-3 justify-content-center mt-5" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link tabPanel active" id="pills-home-tab" data-toggle="pill" href="#showing" role="tab" aria-controls="pills-home" aria-selected="true">Showing</a>
+                        <a class="nav-link tabPanel active" id="pills-home-tab" data-toggle="pill" href="#showing" role="tab" aria-controls="pills-home" aria-selected="true">Đang chiếu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tabPanel " id="pills-profile-tab" data-toggle="pill" href="#soon" role="tab" aria-controls="pills-profile" aria-selected="false">Soon</a>
+                        <a class="nav-link tabPanel " id="pills-profile-tab" data-toggle="pill" href="#soon" role="tab" aria-controls="pills-profile" aria-selected="false">Sắp chiếu</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">

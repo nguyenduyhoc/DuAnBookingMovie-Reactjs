@@ -1,13 +1,14 @@
+/* eslint-disable no-sequences */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateInformationUser } from '../../redux/Action/UsersAction'
+import { updateInformationUser, userInformationAction } from '../../redux/Action/UsersAction'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 
 export default function UserInformation() {
     const dispatch = useDispatch()
-    const { user } = useSelector(state => state.UsersReducer)
-    // console.log(user)
+    const { user, userInformation } = useSelector(state => state.UsersReducer)
+    // console.log(user.taiKhoan)
     const formik = useFormik({
         initialValues: {
             taiKhoan: user.taiKhoan,
@@ -28,22 +29,39 @@ export default function UserInformation() {
         }),
 
     })
-    console.log(formik.values)
+    // console.log(formik.values)
     const handleSubmit = () => {
         // console.log(formik.isValid)
         // console.log(formik.values)
         dispatch(updateInformationUser(formik.values))
-
-
     }
+    useEffect(() => {
+        dispatch(userInformationAction(user))
+    }, [dispatch, user])
+
+
+    console.log(userInformation?.thongTinDatVe)
+    const renderTableUser = () => {
+        return userInformation?.thongTinDatVe?.map((item, index) => {
+            return item.danhSachGhe.map((chair, index1) => {
+                return <tr key={index,index1}>
+                    <td>{item.tenPhim}</td>
+                    <td>{(item.ngayDat).split('T')[0]}</td>
+                    <td>{(item.ngayDat).split('T')[1]}</td>
+                    <td>{chair.tenHeThongRap} </td>
+                    <td>{chair.tenGhe}</td>
+                    <td>{item.giaVe} </td>
+                </tr>
+            })
+        })
+    }
+
     return (
         <div>
             <div className="container rounded bg-white mt-5 mb-5">
                 <form onSubmit={formik.handleSubmit}>
                     <div className="row">
-                        <div className="col-md-3 border-right">
-                            <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU" /><span className="font-weight-bold">{user.hoTen}</span><span className="text-black-50">{user.email}</span><span> </span></div>
-                        </div>
+                      
                         <div className="col-md-5 border-right">
                             <div className="p-3 py-5" >
                                 <div className="d-flex justify-content-between align-items-center mb-3">
@@ -75,7 +93,28 @@ export default function UserInformation() {
                         </div>
                     </div>
                 </form>
+                <div>
+                    <h3>Lịch sử đặt vé:</h3>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Tên Phim</th>
+                                <th>Ngày dặt</th>
+                                <th>Giờ đặt</th>
+                                <th>Địa điểm</th>
+                                <th>Só ghế</th>
+                                <th>Giá vé</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {renderTableUser()}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
 
         </div>
     )

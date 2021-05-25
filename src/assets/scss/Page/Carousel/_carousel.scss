@@ -4,38 +4,18 @@
 .carousel{
     margin-top: 8px;
     @include Responsive(xl){
-        display: flex;
-        .iconPlayVideoCarousel{
-            right: 0;
-            left: 44%;
-            bottom: 80%;
-            top: 20%;
-            font-size: 4rem;
-        }
+       
     }
     @include Responsive(md){
-        display: flex;
-        .iconPlayVideoCarousel{
-            right: 0;
-            left: 44%;
-            bottom: 80%;
-            top: 20%;
-            font-size: 4rem;
-        }
+   
         
     }
     @include Responsive(sm){
-        display: flex;
-        .iconPlayVideoCarousel{
-            right: 0;
-            left: 44%;
-            bottom: 80%;
-            top: 20%;
-            font-size: 4rem;
-        }
+  
+       
     }
     @include Responsive(xs){
-       display: none;
+     
     }
 }
 

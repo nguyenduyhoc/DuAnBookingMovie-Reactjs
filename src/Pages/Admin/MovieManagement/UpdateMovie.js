@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { updateMovieAction } from '../../../redux/Action/MovieAction'
 import { formatDate } from '../../../util/GetDateFormatted'
 import { removeAccents } from '../../../util/RemoveAccents'
+import { DropzoneArea } from 'material-ui-dropzone'
 
 export default function UpdateMovie(props) {
-    console.log(props.movie)
+    const [picture, setPicture] = useState(null)
+    // console.log(props.movie)
+
 
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -24,7 +27,6 @@ export default function UpdateMovie(props) {
         validationSchema: Yup.object().shape({
             tenPhim: Yup.string().required('tên phim không được bỏ trống'),
             trailer: Yup.string().required('Trailer không được bỏ trống'),
-            hinhAnh: Yup.string().required('Hình ảnh người dùng không được bỏ trống'),
             moTa: Yup.string().required('Mô tả không được bỏ trống'),
             danhGia: Yup.string().required('Đánh giá không được bỏ trống')
         }),
@@ -35,7 +37,7 @@ export default function UpdateMovie(props) {
     const handleSubmit = () => {
         const ngayKhoiChieu = formatDate(formik.values.ngayKhoiChieuValue)
         const biDanh = removeAccents(formik.values.tenPhim)
-        const finalData = {...formik.values, ngayKhoiChieu, biDanh}
+        const finalData = { ...formik.values, ngayKhoiChieu, biDanh, picture }
         if (formik.isValid) {
             dispatch(updateMovieAction(finalData))
         }
@@ -55,37 +57,52 @@ export default function UpdateMovie(props) {
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="tenPhim">Tên phim</label>
-                            <input type="text" className="form-control" id="tenPhim" value={props.movie?.tenPhim} onChange={formik.handleChange} />
+                            <input type="text" className="form-control" id="tenPhim" value={formik.values?.tenPhim} onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.tenPhim}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="trailer">Link trailer</label>
-                            <input type="text" className="form-control" id="trailer" value={props.movie?.trailer} onChange={formik.handleChange} />
+                            <input type="text" className="form-control" id="trailer" value={formik.values?.trailer} onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.trailer}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="ngayKhoichieu">Ngày khởi chiếu</label>
-                            <input type="date"  className="form-control" id="ngayKhoiChieuValue"
-                                placeholder={props.movie?.ngayKhoiChieuValue} onChange={formik.handleChange}
+                            <input type="date" className="form-control" id="ngayKhoiChieuValue"
+                                placeholder={formik.values?.ngayKhoiChieuValue} onChange={formik.handleChange}
                             />
                             <p className="text-danger">{formik.errors.ngayKhoiChieu}</p>
                         </div>
                         <div className="col-md-6 mb-3">
                             <label htmlFor="danhGia">Đánh giá</label>
-                            <input type="nummber" className="form-control" id="danhGia" value={props.movie?.danhGia} onChange={formik.handleChange} />
+                            <input type="nummber" className="form-control" id="danhGia" value={formik.values?.danhGia} onChange={formik.handleChange} />
                             <p className="text-danger">{formik.errors.danhGia}</p>
                         </div>
                     </div>
                     <div className="mb-3">
                         <div className="form-group">
                             <label htmlFor="hinhAnh">Hình Ảnh</label>
-                            <input type="file" className="form-control" id="hinhAnh" onChange={formik.handleChange} />
-                            <p className="text-danger">{formik.errors.hinhAnh}</p>
+                            <div className="d-flex ">
+                                <img src={formik.values?.hinhAnh} style={{ width: '100%' }} alt={formik.values?.tenPhim} />
+                                <div className="ml-2x">
+                                    <DropzoneArea
+                                        filesLimit={1}
+                                        showAlerts={false}
+                                        acceptedFiles={["image/*"]}
+                                        dropzoneText={"Drag and drop an image here or click"}
+                                        onChange={(image) => setPicture(image[0])}
+
+                                        maxFileSize={50000000}
+                                    />
+                                </div>
+
+                            </div>
+
+
                         </div>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="moTa">Mô Tả</label>
-                        <textarea className="form-control" id="moTa" rows={3} value={props.movie?.moTa} onChange={formik.handleChange} />
+                        <textarea className="form-control" id="moTa" rows={3} value={formik.values?.moTa} onChange={formik.handleChange} />
                         <p className="text-danger">{formik.errors.moTa}</p>
                         <div id="invalidMoTa" className="invalid-form">
                         </div>

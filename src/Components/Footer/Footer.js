@@ -14,12 +14,12 @@ export default function Footer() {
                                 <p className="title pl-0">TIX</p>
                                 <div className="row w-100 content-document">
                                     <div className="col-sm-6 col-xs-6 ">
-                                        <a href="#">FAQ</a>
-                                        <a href="#">Brand Guidelines</a>
+                                        <a href="https://tix.vn/faq" >FAQ</a>
+                                        <a href="https://tix.vn/brand-guideline/">Brand Guidelines</a>
                                     </div>
                                     <div className="col-sm-6">
-                                        <a href="#">Thỏa thuận sử dụng</a>
-                                        <a href="#">Chính sách bảo mật</a>
+                                        <a href="https://tix.vn/thoa-thuan-su-dung">Thỏa thuận sử dụng</a>
+                                        <a href="https://tix.vn/chinh-sach-bao-mat">Chính sách bảo mật</a>
                                     </div>
                                 </div>
                             </div>

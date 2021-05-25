@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import { registerAction } from '../../redux/Action/UsersAction'
+import { phoneRegex } from '../../util/Setting'
 
 export default function Register() {
     const dispatch = useDispatch()
@@ -24,15 +25,9 @@ export default function Register() {
             matKhauConfirmation: Yup.string()
                 .oneOf([Yup.ref('matKhau'), null], 'Mật khẩu không trùng khớp'),
             hoTen: Yup.string().required('Họ tên không được bỏ trống'),
-            soDt: Yup.string().required('Số điện thoại không được bỏ trống'),
+            soDt: Yup.string().matches(phoneRegex, 'Số điện thoại không đúng định dạng'),
             email: Yup.string().required('Email không được bỏ trống'),
         }),
-        // // onSubmit: values => {
-        // //     console.log(values)
-        // //     const action = registerAction(values);
-        // //     dispatch(action)
-
-        // },
 
     })
     const handleSubmit = () => {
@@ -46,19 +41,13 @@ export default function Register() {
     console.log(formik.values)
     return (
         <div>
-            <div className="register">
-                <div className="card bg-light">
-                    <article className="card-body mx-auto" style={{ maxWidth: 400 }}>
-                        <h4 className="card-title mt-3 text-center">Create Account</h4>
-                        <p className="text-center">Get started with your free account</p>
-                        <p>
-                            <a href className="btn btn-block btn-twitter"> <i className="fab fa-twitter" /> &nbsp; Login via Twitter</a>
-                            <a href className="btn btn-block btn-facebook"> <i className="fab fa-facebook-f" /> &nbsp; Login via facebook</a>
-                        </p>
-                        <p className="divider-text">
-                            <span className="bg-light">OR</span>
-                        </p>
-                        <form>
+
+            <div className="card register">
+                <div className="register__wrappe">
+                    <article className="card-body" >
+                        <img className="logoWeb text-center" src={require("../../assets/img/logo/logoWeb.png").default} alt="logoWeb" />
+                        <h4 className="card-title mt-3 text-center">Tạo tài khoản</h4>
+                        <form className="mt-5">
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user" /> </span>
@@ -69,14 +58,14 @@ export default function Register() {
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock" /> </span>
-                                    <input className="form-control" placeholder="Create password" id="matKhau" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
+                                    <input className="form-control" placeholder="Mật khẩu" id="matKhau" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
                                 <p className="text-danger">{formik.errors.matKhau}</p>
                             </div>
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock" /> </span>
-                                    <input className="form-control" placeholder="Repeat password" id="matKhauConfirmation" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
+                                    <input className="form-control" placeholder="Nhập lại mật khẩu" id="matKhauConfirmation" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
                                 <p className="text-danger">{formik.errors.matKhauConfirmation}</p>
                             </div>
@@ -104,13 +93,14 @@ export default function Register() {
 
 
                             <div className="form-group">
-                                <button type="button" className="btn btn-primary btn-block" onClick={handleSubmit}> Create Account</button>
+                                <button type="button" className="btn btn-primary btn-block" onClick={handleSubmit}> Tạo tài khoản</button>
                             </div>
-                            <p className="text-center">Have an account?  <NavLink activeClassName="text-danger" to="/login">Login</NavLink> </p>
+                            <p className="text-center">Bạn đã có tài khoản ?  <NavLink className="text-danger" to="/login">Đăng nhập</NavLink> </p>
                         </form>
                     </article>
                 </div>
             </div>
+
 
         </div>
     )

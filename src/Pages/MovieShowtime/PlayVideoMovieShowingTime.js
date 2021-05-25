@@ -75,7 +75,7 @@ export default function PlayVideoMovieShowTime(props) {
                         <h4>{props.movie?.tenPhim}</h4>
                         <p>Đánh giá: {props.movie?.danhGia}</p>
                     </div>
-                    <button className="btn btn-danger btnBuyTicket">Buy Ticket</button>
+                    <NavLink className="btn btn-danger btnBuyTicket" to={`/detail/${props.movie?.maPhim}`}  >Mua vé</NavLink>
                 </div>
             </div>
 

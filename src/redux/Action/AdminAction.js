@@ -66,8 +66,8 @@ export const deletedUser = (taiKhoan) => {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
 
             })
-            // getAllUser()
-            // getAllUserPage()
+            dispatch(getAllUserPage())
+            dispatch(getAllUser())
             alert("Xóa người dùng thành công !!")
 
         } catch (errors) {
@@ -89,8 +89,8 @@ export const updateInformationUser = (updateUser) => {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN) }
             })
             // Checked
-            getAllUserPage()
-            getAllUser()
+            dispatch(getAllUserPage())
+            dispatch(getAllUser())
             alert("Cập nhật thành công")
         } catch (errors) {
             // Checked

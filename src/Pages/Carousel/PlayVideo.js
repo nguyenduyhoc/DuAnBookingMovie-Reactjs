@@ -83,7 +83,7 @@ export default function PlayVideo(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-          <iframe id="responsiveVideo" style={{width:800,height:500}} src={props.movie?.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe id="responsiveVideo"  src={props.movie?.trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </Fade>
       </Modal>

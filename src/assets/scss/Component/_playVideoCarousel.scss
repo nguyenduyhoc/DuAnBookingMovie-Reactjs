@@ -3,12 +3,14 @@
 .imgCarousel{
     cursor: pointer;
     margin-top: 100px;
+    padding: 0 20px;
+    position: relative;
     .iconPlayVideoCarousel{
         font-size: 5rem;
         color: $color-white-0;
         position: absolute;
         right: 0;
-        left: 47%;
+        left: 40%;
         bottom: 70%;
         top: 30%;
         transition: all 0.5s;

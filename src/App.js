@@ -13,7 +13,6 @@ import './assets/scss/Vendor/slick-carousel/slick/slick.css';
 
 import { createBrowserHistory} from 'history';
 import Detail from "./Pages/Detail/Detail";
-import Footer from "./Components/Footer/Footer";
 import Admin from "./Pages/Admin/Admin";
 import SellTicket from "./Pages/SellTicket/SellTicket";
 import Register from "./Pages/Register/Register";

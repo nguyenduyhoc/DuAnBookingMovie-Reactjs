@@ -5,14 +5,17 @@ import { useDispatch } from 'react-redux'
 import { addMovieAction } from '../../../redux/Action/MovieAction'
 import { formatDate } from '../../../util/GetDateFormatted'
 import { removeAccents } from '../../../util/RemoveAccents'
+import { DropzoneArea } from 'material-ui-dropzone'
+
 
 export default function AddMovie() {
+    const [picture, setPicture] = useState(null)
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             tenPhim: "",
             trailer: "",
-            hinhAnh: "",
+            hinhAnh: ".jpg",
             moTa: "",
             maNhom: "GP02",
             ngayKhoiChieuValue: "",
@@ -21,7 +24,6 @@ export default function AddMovie() {
         validationSchema: Yup.object().shape({
             tenPhim: Yup.string().required('tên phim không được bỏ trống'),
             trailer: Yup.string().required('Trailer không được bỏ trống'),
-            hinhAnh: Yup.string().required('Hình ảnh người dùng không được bỏ trống'),
             moTa: Yup.string().required('Mô tả không được bỏ trống'),
             danhGia: Yup.string().required('Đánh giá không được bỏ trống')
         }),
@@ -31,14 +33,14 @@ export default function AddMovie() {
     const handleSubmit = () => {
         const ngayKhoiChieu = formatDate(formik.values.ngayKhoiChieuValue)
         const biDanh = removeAccents(formik.values.tenPhim)
-        const finalData = { ...formik.values, ngayKhoiChieu, biDanh }
+        const finalData = { ...formik.values, ngayKhoiChieu, biDanh, picture }
         // console.log(biDanh)
         if (formik.isValid) {
             dispatch(addMovieAction(finalData))
             // console.log(finalData)
         }
     }
- 
+
     return (
         <div className="modal-content">
             <div className="modal-header">
@@ -76,7 +78,16 @@ export default function AddMovie() {
                         <div className="form-group">
 
                             <label htmlFor="hinhAnh">Hình Ảnh</label>
-                            <input type="file" className="form-control" id="hinhAnh" placeholder="" onChange={formik.handleChange} />
+                            <div className="form-group">
+                                <DropzoneArea
+                                    filesLimit={1}
+                                    showAlerts={false}
+                                    acceptedFiles={["image/*"]}
+                                    dropzoneText={"Drag and drop an image here or click"}
+                                    onChange={(image) => setPicture(image[0])}
+                                    maxFileSize={50000000}
+                                />
+                            </div>
                             <p className="text-danger">{formik.errors.hinhAnh}</p>
                         </div>
                     </div>

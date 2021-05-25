@@ -27,7 +27,7 @@ export default function TicketList(props) {
             } else {
                 ticketClass = 'ghe';
             }
-            return <div  style={{display:"inline-block", flexGrow:1, width:'6.25%' }}><button onClick={() => {
+            return <div  id="listChair" style={{display:"inline-block", flexGrow:1, width:'6.25%' }}><button onClick={() => {
                 orderChair(ghe)
             }} className={`${ticketClass}  mt-3`} disabled={ticketDisable} >{ghe.tenGhe} </button></div>
         })
@@ -44,7 +44,7 @@ export default function TicketList(props) {
                 <div className="text-center text-light">
                     Monitor
                 </div>
-                <div className="screen" style={{ marginLeft: 100 }}></div>
+                <div className="screen"></div>
                 <div className="d-flex w-100" style={{ marginTop: 50, flexWrap:"wrap", }}>
                     {renderDanhSachGhe()}
                 </div>

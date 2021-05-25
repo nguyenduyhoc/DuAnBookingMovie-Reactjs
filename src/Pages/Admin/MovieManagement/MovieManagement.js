@@ -93,7 +93,7 @@ export default function MovieManagement() {
     useEffect(() => {
         dispatch(getAllMoviePage(1))
         dispatch(getAllMovieAction())
-    }, [])
+    }, [dispatch])
     return (
         <div>
             <div>
@@ -106,7 +106,7 @@ export default function MovieManagement() {
                 </nav>
                 <div className="container-fluid">
                     <div className="row">
-                        <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                        <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar ">
                             <div className="sidebar-sticky pt-3">
                                 <ul className="nav flex-column">
                                     <li className="nav-item">
