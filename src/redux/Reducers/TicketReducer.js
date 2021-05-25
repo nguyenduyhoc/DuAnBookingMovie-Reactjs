@@ -1,3 +1,5 @@
+import { DAT_GHE, TICKET_INFORMATION, XOA_GHE_DANG_CHON } from "../../util/Setting"
+
 const initialState = {
     ticketInformation: [],
     danhSachGheDangChon: []
@@ -7,10 +9,10 @@ const initialState = {
 export const TicketReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case "TICKET-INFORMATION": {
+        case TICKET_INFORMATION: {
             return { ...state, ticketInformation: action.ticketInformation }
         }
-        case "DAT-GHE": {
+        case DAT_GHE : {
             let danhSachGheCapNhat = [...state.danhSachGheDangChon]
             let index = danhSachGheCapNhat.findIndex(chair => chair.maGhe === action.thongTinGhe.maGhe)
             if (index !== -1) {
@@ -20,7 +22,7 @@ export const TicketReducer = (state = initialState, action) => {
             }
             return { ...state, danhSachGheDangChon: danhSachGheCapNhat }
         }
-        case "XOA_GHE_DANG_CHON": {
+        case XOA_GHE_DANG_CHON: {
             return { ...state, danhSachGheDangChon: [] }
         }
 

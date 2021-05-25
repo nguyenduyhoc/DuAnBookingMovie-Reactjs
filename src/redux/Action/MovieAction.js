@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_MOVIE, ACCESS_TOKEN } from "../../util/Setting";
+import { GET_ALL_MOVIE, ACCESS_TOKEN, GET_DETAIL_MOVIE, GET_ALL_MOVIE_PAGE } from "../../util/Setting";
 
 export const getAllMovieAction = (maNhom = "GP02") => {
   // Tai khoan va mat khau
@@ -27,7 +27,7 @@ export const getDetailMovieAction = (maPhim) => {
         method: "GET",
       });
       dispatch({
-        type: "GET_DETAIL_MOVIE",
+        type: GET_DETAIL_MOVIE,
         detailMovie: result.data,
       });
     } catch (errors) {
@@ -44,7 +44,7 @@ export const getAllMoviePage = (page) => {
         method: "GET",
       });
       dispatch({
-        type: "GET-ALL-MOVIE-PAGE",
+        type: GET_ALL_MOVIE_PAGE,
         allMoviePage: result.data,
       });
     } catch (errors) {

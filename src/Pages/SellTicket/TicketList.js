@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ticketInformationAction } from '../../redux/Action/TicketAction'
+import { DAT_GHE } from '../../util/Setting'
 
 export default function TicketList(props) {
     // console.log(props.maLichChieu)
@@ -34,7 +35,7 @@ export default function TicketList(props) {
     }
     const orderChair = (thongTinGhe) => {
         dispacth({
-            type: "DAT-GHE",
+            type: DAT_GHE,
             thongTinGhe: thongTinGhe
         })
     }

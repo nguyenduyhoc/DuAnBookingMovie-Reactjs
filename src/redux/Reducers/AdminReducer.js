@@ -1,3 +1,5 @@
+import { GET_ALL_USER, GET_ALL_USER_PAGE } from "../../util/Setting"
+
 const initialState = {
     allUserPage: [],
     allUser: [],
@@ -8,10 +10,10 @@ const initialState = {
 export const AdminReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case "GET-ALL-USER-PAGE": {
+        case GET_ALL_USER_PAGE: {
             return { ...state, allUserPage: action.allUserPage, adminLoading: false }
         }
-        case "GET-ALL-USER": {
+        case GET_ALL_USER: {
             return { ...state, allUser: action.allUser, adminLoading: false }
         }
         // case "UPDATE-USER": {

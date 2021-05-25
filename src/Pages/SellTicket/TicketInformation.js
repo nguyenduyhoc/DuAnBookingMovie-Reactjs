@@ -4,6 +4,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {history} from '../../App'
 import { orderTicket } from '../../redux/Action/TicketAction'
+import { DAT_GHE, XOA_GHE_DANG_CHON } from '../../util/Setting'
 
 export default function TicketInformation(props) {
     const { danhSachGheDangChon } = useSelector(state => state.TicketReducer)
@@ -23,7 +24,7 @@ export default function TicketInformation(props) {
                 <td >{item.loaiGhe} </td>
                 <td >{item.giaVe} </td>
                 <td><button className="btn btn-danger" onClick={() => dispacth({
-                    type: "DAT-GHE",
+                    type: DAT_GHE,
                     thongTinGhe: item
                 })}>Xóa</button></td>
             </tr>
@@ -55,7 +56,7 @@ export default function TicketInformation(props) {
                             <th>Loại ghế</th>
                             <th>Giá</th>
                             {danhSachGheDangChon.toString() !== "" ? <th><button className="btn btn-danger" onClick={() => dispacth({
-                                type: "XOA_GHE_DANG_CHON",
+                                type: XOA_GHE_DANG_CHON,
                             })}>Xóa tất cả</button></th> : ""}
                         </tr>
                     </thead>

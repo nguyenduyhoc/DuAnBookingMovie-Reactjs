@@ -16,8 +16,9 @@
     align-self: center;
     cursor: pointer;
     width: 150px;
-    height: 50px;
+    height: 80px;
     font-size: 23px;
+  padding: 20px;
   }
 }
 .findMovieBox {
@@ -54,6 +55,10 @@
       box-shadow: 0 0 10px rgb(0 0 0 / 30%);
 
       border: none;
+    }
+    .btn{
+      padding: 0;
+      height: 50px;
     }
   }
 }

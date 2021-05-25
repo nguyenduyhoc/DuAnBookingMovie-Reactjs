@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ACCESS_TOKEN } from '../../util/Setting'
+import { ACCESS_TOKEN, TICKET_INFORMATION, XOA_GHE_DANG_CHON } from '../../util/Setting'
 
 
 export const ticketInformationAction = (maLichChieu) => { // Tai khoan va mat khau
@@ -10,7 +10,7 @@ export const ticketInformationAction = (maLichChieu) => { // Tai khoan va mat kh
                 method: 'GET',
             })
             dispatch({
-                type: "TICKET-INFORMATION",
+                type: TICKET_INFORMATION,
                 ticketInformation: result.data
             })
         } catch (errors) {
@@ -30,7 +30,7 @@ export const orderTicket = (ticket) => { // Tai khoan va mat khau
             })
             dispatch(ticketInformationAction(ticket.maLichChieu))
             dispatch({
-                type: 'XOA_GHE_DANG_CHON'
+                type: XOA_GHE_DANG_CHON
             })
             alert('Đặt vé thành công')
         } catch (errors) {

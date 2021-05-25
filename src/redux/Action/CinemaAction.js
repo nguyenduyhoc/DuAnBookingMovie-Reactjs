@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { GET_ALL_CINEMA, GET_ALL_CINEMA_BRAND, GET_ALL_CINEMA_SCHEDULE } from '../../util/Setting'
 
 export const getCinemaBrandAction = () => {
     return async (dispatch) => {
@@ -8,7 +9,7 @@ export const getCinemaBrandAction = () => {
                 method: 'GET'
             })
             dispatch({
-                type: 'GET_ALL_CINEMA_BRAND',
+                type: GET_ALL_CINEMA_BRAND,
                 allCinemaBrand: result.data
             })
         } catch (errors) {
@@ -24,7 +25,7 @@ export const getCinemaAction = (Brand) => {
         method: "GET",
       });
       dispatch({
-        type: "GET_ALL_CINEMA",
+        type: GET_ALL_CINEMA,
         allCinema: result.data,
       });
     } catch (errors) {
@@ -40,7 +41,7 @@ export const getCinemaScheduleAction = (Brand) => {
         method: "GET",
       });
       dispatch({
-        type: "GET_ALL_CINEMA_SCHEDULE",
+        type: GET_ALL_CINEMA_SCHEDULE,
         allCinemaSchedule: result.data,
       });
     } catch (errors) {

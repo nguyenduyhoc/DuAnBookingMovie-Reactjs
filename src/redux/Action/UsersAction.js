@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { result } from 'lodash'
 import { history } from '../../App'
-import { ACCESS_TOKEN, USER_LOGIN } from '../../util/Setting'
+import { ACCESS_TOKEN, LOGIN_SUCCESS, USER_INFORMATION, USER_LOGIN } from '../../util/Setting'
 
 export const loginAction = (userLogin) => {
     return async (dispatch) => {
@@ -13,7 +12,7 @@ export const loginAction = (userLogin) => {
             })
             // console.log('result', result.data);
             dispatch({
-                type: "LOGIN-SUCCESS",
+                type: LOGIN_SUCCESS,
                 user: result.data,
                 maLoaiNguoiDung: result.data
             })
@@ -66,7 +65,7 @@ export const userInformationAction = (userID) => {
                 data: userID,
             })
             dispatch({
-                type: "USER_INFORMATION",
+                type: USER_INFORMATION,
                 userInformation: result.data
             })
            

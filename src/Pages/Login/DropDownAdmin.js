@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { history } from '../../App'
+import { LOGOUT_SUCCESS } from '../../util/Setting'
 
 export default function DropDownAdmin(props) {
     const { user } = useSelector(state => state.UsersReducer)
@@ -9,7 +10,7 @@ export default function DropDownAdmin(props) {
 
     const handleLogOut = () => {
         dispatch({
-            type: "LOGOUT"
+            type: LOGOUT_SUCCESS
         })
         localStorage.removeItem('USER_LOGIN')
         localStorage.removeItem('ACCESS_TOKEN')

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ACCESS_TOKEN } from '../../util/Setting'
+import { ACCESS_TOKEN, GET_ALL_USER, GET_ALL_USER_PAGE } from '../../util/Setting'
 
 
 export const getAllUserPage = (page) => {
@@ -11,7 +11,7 @@ export const getAllUserPage = (page) => {
             })
             // console.log('result', result.data);
             dispatch({
-                type: "GET-ALL-USER-PAGE",
+                type: GET_ALL_USER_PAGE,
                 allUserPage: result.data
             })
         } catch (errors) {
@@ -29,7 +29,7 @@ export const getAllUser = (maNhom = "GP02") => {
             })
             // console.log('result', result.data);
             dispatch({
-                type: "GET-ALL-USER",
+                type: GET_ALL_USER,
                 allUser: result.data
             })
         } catch (errors) {

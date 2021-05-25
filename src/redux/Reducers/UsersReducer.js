@@ -1,3 +1,4 @@
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, USER_INFORMATION } from "../../util/Setting";
 
 let user = {};
 let taiKhoan = "";
@@ -18,15 +19,15 @@ const stateDefault = {
 
 export const UsersReducer = (state = stateDefault, action) => {
     switch (action.type) {
-        case "LOGIN-SUCCESS": {
+        case LOGIN_SUCCESS: {
             return { ...state, user: action.user, taiKhoan: action.user.taiKhoan,userLoading: false }
         }
-        case "LOGOUT": {
+        case LOGOUT_SUCCESS: {
             state.user = {};
             state.taiKhoan = '';
             return { ...state, userLoading: false  }
         }
-        case "USER_INFORMATION": {
+        case USER_INFORMATION: {
             return { ...state, userInformation : action.userInformation ,userLoading: false  }
         }
         case "RESET_LOADING": {
