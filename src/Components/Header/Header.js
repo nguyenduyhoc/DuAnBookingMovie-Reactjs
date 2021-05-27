@@ -7,7 +7,7 @@ import LogInLogOutButton from '../../Pages/Login/LogInLogOutButton'
 export default function Header() {
     const { taiKhoan } = useSelector(state => state.UsersReducer)
     return (
-        <div>
+        <div  >
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navBarHeader">
                 <a className="navbar-brand" href="/"><img className="logoWeb" src={require("../../assets/img/logo/logoWeb.png").default} alt="logoWeb" /></a>
                 <button className="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#collapsingNavbar" aria-label="Toggle navigation">

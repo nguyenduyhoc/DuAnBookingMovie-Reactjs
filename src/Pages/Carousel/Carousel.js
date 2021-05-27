@@ -41,6 +41,7 @@ export default function Carousel() {
                 slidesToScroll: 1,
                 initialSlide: 2,
                 speed: 1000,
+                dots: false,
               }
             },
             {
@@ -49,7 +50,7 @@ export default function Carousel() {
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 speed: 500,
-
+                dots: false,
               }
             }
           ]
