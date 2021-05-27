@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Cinema() {
   const [allCinemaBrand, setallCinemaBrand] = useState([]);
@@ -92,21 +93,25 @@ export default function Cinema() {
     return danhSachPhim?.danhSachPhim.map((item, index) => {
       return (
         <div className="wrapMovie panel" key={index}>
-          <div className="movieInfo">
-            <img src={item.hinhAnh} className="movieImage" alt />
-            <div className="wrapInfo">
-              <p>
-                <span className="ageTag ageTag-general">P</span>
-                <span className="movieTitle">{item.tenPhim}</span>
-              </p>
-              <p>100 phút - TIX 7.7 - IMDb 0</p>
+          <Link
+            to={`/detail/${item.maPhim}`}
+            style={{ textDecoration: "none" }}
+          >
+            <div className="movieInfo">
+              <img src={item.hinhAnh} className="movieImage" alt />
+              <div className="wrapInfo">
+                <p>
+                  <span className="ageTag ageTag-general">P</span>
+                  <span className="movieTitle">{item.tenPhim}</span>
+                </p>
+                <p>100 phút - TIX 7.7 - IMDb 0</p>
+              </div>
             </div>
-          </div>
-          <div className="movieSession collapse in">
-            <div className="listTagTime">
-              <div className="movieVersion">2D Digital</div>
-              <div className="timeSession">
-                <a className="movieTimeSession" href="#">
+            <div className="movieSession collapse in">
+              <div className="listTagTime">
+                <div className="movieVersion">2D Digital</div>
+                <div className="timeSession">
+                  {/* <a className="movieTimeSession" href="#">
                   <span className="movie-start-time">17:15</span> - 18:55
                 </a>
                 <a className="movieTimeSession" href="#">
@@ -117,10 +122,11 @@ export default function Cinema() {
                 </a>
                 <a className="movieTimeSession" href="#">
                   <span className="movie-start-time">22:00</span> - 23:40
-                </a>
+                </a> */}
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       );
     });
