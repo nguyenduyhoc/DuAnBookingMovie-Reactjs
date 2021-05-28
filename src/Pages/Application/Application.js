@@ -8,9 +8,9 @@ export default function Application() {
         slidesToScroll: 1,
         autoplay: true,
         speed: 1000,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 4000,
         arrows: false,
-        infinite: false,
+        infinite: true,
         row: 1,
     };
     return (
