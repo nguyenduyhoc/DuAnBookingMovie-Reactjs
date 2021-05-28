@@ -11,7 +11,8 @@ export default function FindMovieBox() {
   const [chosenTime, setchosenTime] = useState("");
   const [chosenmaLichChieu, setchosenmaLichChieu] = useState("");
   const { allMovie } = useSelector((state) => state.MovieReducer);
- 
+  const [buttonForSellTikcet, setbuttonForSellTikcet] = useState(true)
+
   function removeDuplicates(array) {
     let a = [];
     array?.map((x, index) => {
@@ -24,7 +25,7 @@ export default function FindMovieBox() {
 
   useEffect(() => {
     setchosenmaLichChieu(chosenCinema?.lichChieuPhim?.find(item => item.ngayChieuGioChieu === `${chosenDate}T${chosenTime}`)?.maLichChieu)
-}, [chosenTime])
+  }, [chosenTime])
 
 
   const getDetailMovie = async (maPhim) => {
@@ -101,9 +102,11 @@ export default function FindMovieBox() {
         id="findMovieTools"
       >
         <div className="findMovieBox">
-          <select class="form-control form-control-lg "name="findBoxChooseMovie"
+          <select class="form-control form-control-lg " name="findBoxChooseMovie"
             onChange={(e) => {
               getDetailMovie(e.target.value);
+              setbuttonForSellTikcet(true)
+
             }}
           >
             <option value="" hidden>
@@ -113,16 +116,18 @@ export default function FindMovieBox() {
           </select>
 
           <select class="form-control form-control-lg " name="findBoxChooseMovie"
-              onChange={(e) => {
+            onChange={(e) => {
               setchosenCinemaBrand(
                 chosenMovie.heThongRapChieu.find(
                   (item) => item.maHeThongRap === e.target.value
                 )
               );
+              setbuttonForSellTikcet(true)
+
             }}
           >
             <option value="" hidden>
-            Tên Rạp
+              Tên Rạp
             </option>
             {renderChooseCinemaBrand()}
           </select>
@@ -135,6 +140,8 @@ export default function FindMovieBox() {
                   (item) => item.maCumRap === e.target.value
                 )
               );
+              setbuttonForSellTikcet(true)
+
             }}
           >
             <option value="" hidden>
@@ -147,6 +154,7 @@ export default function FindMovieBox() {
             name="findBoxChooseDate"
             onChange={(e) => {
               setchosenDate(e.target.value);
+              setbuttonForSellTikcet(true)
             }}
           >
             <option value="" hidden>
@@ -155,16 +163,16 @@ export default function FindMovieBox() {
             {renderChooseDate()}
           </select>
           <select class="form-control form-control-lg" name="findBoxChooseWhen" onChange={(e) => {
-              setchosenTime(e.target.value);
-            }}>
+            setchosenTime(e.target.value);
+            setbuttonForSellTikcet(false)
+          }}>
             <option value="" hidden>
               Thời gian
             </option>
             {renderChooseTime()}
           </select>
         </div>
-
-        <Link className="btn btn-danger"  to={`/sellticket/${chosenmaLichChieu}`} >Mua vé</Link>
+        {buttonForSellTikcet ? <button className="btn btn-danger" onClick={() => { alert("Vui lòng chọn đầy đủ thông tin") }}>Mua vé</button> : <Link className="btn btn-danger" to={`/sellticket/${chosenmaLichChieu}`} >Mua vé</Link>}
       </div>
     </div>
   );
