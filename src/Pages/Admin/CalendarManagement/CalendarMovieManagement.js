@@ -102,7 +102,7 @@ export default function CalendarMovieManagement() {
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="ngayChieuGioChieu">Ngày chiếu </label>
-                                                        <input type="date" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={(e) => {
+                                                        <input style={{height:"55px"}} type="date" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={(e) => {
                                                             setNgayChieu(e.target?.value)
                                                         }} />
                                                     </div>
@@ -127,7 +127,7 @@ export default function CalendarMovieManagement() {
 
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="ngayChieuGioChieu">Giờ chiếu</label>
-                                                        <input type="time" step="1" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={(e) => {
+                                                        <input style={{height:"55px"}} type="time" step="1" className="form-control" id="ngayChieuGioChieuValue" placeholder="" onChange={(e) => {
                                                             setGioChieu(e.target?.value)
                                                         }} />
                                                     </div>
@@ -151,7 +151,7 @@ export default function CalendarMovieManagement() {
                                                     </div>
                                                     <div className="col-md-6 mb-3">
                                                         <label htmlFor="giaVe">Giá vé</label>
-                                                        <input type="text" className="form-control" id="giaVe" placeholder="" required onChange={(e) => {
+                                                        <input style={{height:"55px"}} type="text" className="form-control" id="giaVe" placeholder="" required onChange={(e) => {
                                                             setGiaVe(e.target?.value)
                                                         }} />
 

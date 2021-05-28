@@ -24,9 +24,9 @@ export default function DropDownAdmin(props) {
                     {user.taiKhoan}
                 </button>
                 <div className="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                    {user.maLoaiNguoiDung === "QuanTri" ? <NavLink to="/admin/UsersManagement"><button className="dropdown-item">Admin</button></NavLink> : ""}
-                    <NavLink to="/UserInformation"><button className="dropdown-item">Thông tin cá nhân </button></NavLink>
-                    <button onClick={handleLogOut} className="dropdown-item">Đăng xuất</button>
+                    {user.maLoaiNguoiDung === "QuanTri" ? <NavLink to="/admin/UsersManagement"><button className="dropdown-item" data-toggle="collapse" data-target="#collapsingNavbar" aria-expanded="false">Admin</button></NavLink> : ""}
+                    <NavLink to="/UserInformation"><button className="dropdown-item" data-toggle="collapse" data-target="#collapsingNavbar" aria-expanded="false">Thông tin cá nhân </button></NavLink>
+                    <button onClick={handleLogOut} className="dropdown-item " data-toggle="collapse" data-target="#collapsingNavbar" aria-expanded="false">Đăng xuất</button>
                 </div>
             </div>
         </div>

@@ -11,27 +11,29 @@ export default function MovieShowtime(props) {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "60px",
+        centerPadding: "20px",
         slidesToShow: 3,
         speed: 500,
-        rows: 1,
-        slidesPerRow: 2,
+        rows: 2,
+        slidesPerRow: 1,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 1.4,
-                    slidesPerRow: 2,
-                    row: 1,
+                    slidesToShow: 2,
+                    slidesPerRow: 1,
+                    centerPadding: "10px",
+                    rows: 2,
                 }
             },
             {
                 breakpoint: 767,
                 settings: {
-                    slidesToShow: 0.325,
+                    slidesToShow: 1,
                     slidesPerRow: 1,
-                    row: 1,
-
+                    centerPadding: "0px",
+                    rows:1,
+                   
                 }
             }
         ]

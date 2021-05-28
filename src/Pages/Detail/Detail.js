@@ -174,7 +174,7 @@ export default function Detail(props) {
                         <h5>Đánh giá</h5>
                         <p>{detailMovie.danhGia}</p>
                     </div>
-                    <div className="col-6" >
+                    <div className="col-6 text-justify" >
                         <h5>Nội dung</h5>
                         <p>{detailMovie.moTa}</p>
                     </div>

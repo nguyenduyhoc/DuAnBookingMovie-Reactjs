@@ -6,6 +6,9 @@ export default function Application() {
         className: 'section-outstanding__slider',
         slidesToShow: 1,
         slidesToScroll: 1,
+        autoplay: true,
+        speed: 1000,
+        autoplaySpeed: 3000,
         arrows: false,
         infinite: false,
         row: 1,
@@ -16,7 +19,7 @@ export default function Application() {
                     <div className="row" id="wrapHomeApp">
                         <div className="col-xs-12 col-md-12" id="homeApp">
                             <div className="MaxWidth940">
-                                <div className="row">
+                                <div className="row container">
                                     <div className="col-md-6 app_content_left">
                                         <p className="app_textLeft">Ứng dụng tiện lợi dành cho</p>
                                         <p className="app_textLeft">người yêu điện ảnh</p>

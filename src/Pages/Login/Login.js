@@ -65,7 +65,7 @@ export default function Login() {
                             <p className="text-center">Bạn chưa có tài khoản ?  <NavLink className="text-danger" to="/register">Đăng ký</NavLink> </p>
                             {/* Modal footer */}
                             <div className="modal-footer">
-                                <button type="submit" className="btn btn-success" onClick={formik.handleSubmit}>Login</button>
+                                <button type="submit" className="btn btn-success" onClick={formik.handleSubmit}>Đăng nhập</button>
                             </div>
                         </form>
                     </div>
