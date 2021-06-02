@@ -53,14 +53,14 @@ export default function Register() {
                                     <span className="input-group-text"> <i className="fa fa-user" /> </span>
                                     <input className="form-control" placeholder="Tài khoản" id="taiKhoan" type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.taiKhoan}</p>
+                                {formik.errors.taiKhoan && formik.touched.taiKhoan ? <p className="text-danger">{formik.errors.taiKhoan}</p> : null}
                             </div>
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock" /> </span>
                                     <input className="form-control" placeholder="Mật khẩu" id="matKhau" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.matKhau}</p>
+                                {formik.errors.taiKhoan && formik.touched.matKhau ? <p className="text-danger">{formik.errors.matKhau}</p> : null}
                             </div>
                             <div className="form-group">
                                 <div className="input-group-prepend">
@@ -74,21 +74,21 @@ export default function Register() {
                                     <span className="input-group-text"> <i className="fa fa-user" /> </span>
                                     <input className="form-control" placeholder="Họ và tên" id="hoTen" type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.hoTen}</p>
+                                {formik.errors.taiKhoan && formik.touched.hoTen ? <p className="text-danger">{formik.errors.hoTen}</p> : null}
                             </div>
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-envelope" /> </span>
                                     <input className="form-control" placeholder="Email" type="email" id="email" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.email}</p>
+                                {formik.errors.taiKhoan && formik.touched.email ? <p className="text-danger">{formik.errors.email}</p> : null}
                             </div>
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-phone" /> </span>
                                     <input className="form-control" placeholder="Phone number" type="text" id="soDt" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.soDt}</p>
+                                {formik.errors.taiKhoan && formik.touched.soDt ? <p className="text-danger">{formik.errors.soDt}</p> : null}
                             </div>
 
 
