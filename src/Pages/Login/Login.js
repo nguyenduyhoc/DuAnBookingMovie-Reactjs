@@ -31,9 +31,9 @@ export default function Login() {
                         <form className="container" onSubmit={formik.handleSubmit}   >
                             <img className="logoWeb text-center" src={require("../../assets/img/logo/logoWeb.png").default} alt="logoWeb" />
                             <h3>Đăng nhập</h3>
-                            
+
                             <div className="form-group mt-5">
-                            <p>Đăng nhập để được nhiều ưu đãi, mua vé và bảo mật thông tin!</p>
+                                <p>Đăng nhập để được nhiều ưu đãi, mua vé và bảo mật thông tin!</p>
                                 <div className="input-group-prepend">
                                     <a class="signin-btn" href="https://www.facebook.com/">
                                         <img class="signin-logo" src={require("../../assets/img/SignIn/download.png").default} alt="facebook" />
@@ -47,20 +47,21 @@ export default function Login() {
                                     </a>
                                 </div>
                             </div>
-                            <p style={{fontSize:'10px'}}>Hoặc</p>
+                            <p style={{ fontSize: '10px' }}>Hoặc</p>
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user" /> </span>
                                     <input className="form-control" placeholder="Tài khoản" id="taiKhoan" type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.taiKhoan}</p>
+                                {formik.errors.taiKhoan && formik.touched.taiKhoan ? <p className="text-danger">{formik.errors.taiKhoan}</p> : null}
+
                             </div>
                             <div className="form-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock" /> </span>
                                     <input className="form-control" placeholder="Mật khẩu" id="matKhau" type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} />
                                 </div>
-                                <p className="text-danger">{formik.errors.matKhau}</p>
+                                {formik.errors.taiKhoan && formik.touched.matKhau ? <p className="text-danger">{formik.errors.matKhau}</p> : null}
                             </div>
                             <p className="text-center">Bạn chưa có tài khoản ?  <NavLink className="text-danger" to="/register">Đăng ký</NavLink> </p>
                             {/* Modal footer */}

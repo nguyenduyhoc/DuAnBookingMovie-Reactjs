@@ -167,9 +167,9 @@ export default function FindMovieBox() {
             setbuttonForSellTikcet(false)
           }}>
             <option value="" hidden>
-              Thời gian
+              Suất chiếu
             </option>
-            {renderChooseTime()}
+            {renderChooseTime()} 
           </select>
         </div>
         {buttonForSellTikcet ? <button className="btn btn-danger" onClick={() => { alert("Vui lòng chọn đầy đủ thông tin") }}>Mua vé</button> : <Link className="btn btn-danger" to={`/sellticket/${chosenmaLichChieu}`} >Mua vé</Link>}
