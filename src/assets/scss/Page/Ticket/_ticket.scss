@@ -7,8 +7,7 @@
   background-color: rgba(0, 0, 0, 0.75);
   width: 100%;
   padding-bottom: 10%;
-  max-height: 1200px;
-  height: auto;
+  height: 100vh;
 }
 .titleTicket {
   margin-top: 12%;
@@ -99,6 +98,8 @@
     }
   }
   @include Responsive(md) {
+    height: auto;
+
     .screen {
       margin-left: 63px;
     }
@@ -124,6 +125,7 @@
     }
   }
   @include Responsive(xs) {
+
     .screen {
       border-bottom: 50px solid rgb(255, 159, 95);
       border-left: 50px solid transparent;
@@ -155,5 +157,6 @@
         max-width: none;
     }
     margin-top: 100px;
+    height: auto;
   }
 }
